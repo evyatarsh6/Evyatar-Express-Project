@@ -1,11 +1,15 @@
 const  { Router} = require('express')
+const {MongoClient} = require('mongodb');
 
-const router = Router();
+const uri = "mongodb://localhost:27017/"
+
+const client = new MongoClient(uri);
 
 const database = client.db('TODOLIST-Project-DB');
-
 const TODOList = database.collection('TODOS');
-const filterKind = database.collection('filterInfo').filterKind;
+const filterKind = database.collection('filterInfo').find()
+
+const router = Router();
 
 router.get('/', (req, res) => {
 
