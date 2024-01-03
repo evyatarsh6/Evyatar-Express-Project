@@ -1,10 +1,17 @@
 const express = require('express');
+const {MongoClient} = require('mongodb');
+
+const uri = "mongodb://localhost:27017/"
+
+const client = new MongoClient(uri);
+
 const app = express();
 const port = 3000;
 
 const visibleTODOS = require('./routes/visibleTODOS');
 
-app.all('/shownTODOS', visibleTODOS);
+
+app.get('/shownTODOS', visibleTODOS);
 
 app.get('/', (req, res) => {
   res.send('Got a GET request');

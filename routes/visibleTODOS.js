@@ -2,10 +2,12 @@ const  { Router} = require('express')
 
 const router = Router();
 
-router.post('/', (req, res) => {
+const database = client.db('TODOLIST-Project-DB');
 
-  const filterKind = req.body.filterKind;
-  const TODOList = req.body.TODOList;
+const TODOList = database.collection('TODOS');
+const filterKind = database.collection('filterInfo').filterKind;
+
+router.get('/', (req, res) => {
 
   switch (filterKind) {
     case 'normal':
@@ -15,10 +17,9 @@ router.post('/', (req, res) => {
       res.send(Object.values(TODOList).filter((TODO) => TODO.isDeleted));
       break;
     case 'choosen':
-      res.send(
-        Object.values(TODOList).filter(
-          (TODO) => TODO.isChoosen && !TODO.isDeleted
-        )
+      res.send(Object.values(TODOList).filter(
+        (TODO) => TODO.isChoosen && !TODO.isDeleted
+      )
       );
       break;
     default:
