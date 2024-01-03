@@ -11,24 +11,9 @@ const filterKind = database.collection('filterInfo').find()
 
 const router = Router();
 
-router.get('/', (req, res) => {
-
-  switch (filterKind) {
-    case 'normal':
+router.put('/', (req, res) => {
       res.send(Object.values(TODOList).filter((TODO) => !TODO.isDeleted));
-      break;
-    case 'delete':
-      res.send(Object.values(TODOList).filter((TODO) => TODO.isDeleted));
-      break;
-    case 'choosen':
-      res.send(Object.values(TODOList).filter(
-        (TODO) => TODO.isChoosen && !TODO.isDeleted
-      )
-      );
-      break;
-    default:
-      res.send([]);
   }
-});
+);
 
 module.exports = router;
