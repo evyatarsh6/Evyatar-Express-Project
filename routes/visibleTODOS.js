@@ -1,21 +1,29 @@
-import { Router } from "express";
+const  { Router} = require('express')
 
-const router = Router()
+const router = Router();
 
-router.get('/shownTODOS', (req, res) => {
+router.post('/', (req, res) => {
 
-})
+  const filterKind = req.body.filterKind;
+  const TODOList = req.body.TODOList;
 
+  switch (filterKind) {
+    case 'normal':
+      res.send(Object.values(TODOList).filter((TODO) => !TODO.isDeleted));
+      break;
+    case 'delete':
+      res.send(Object.values(TODOList).filter((TODO) => TODO.isDeleted));
+      break;
+    case 'choosen':
+      res.send(
+        Object.values(TODOList).filter(
+          (TODO) => TODO.isChoosen && !TODO.isDeleted
+        )
+      );
+      break;
+    default:
+      res.send([]);
+  }
+});
 
-
-
-// switch(filterKind){
-//     case "normal":
-//         return Object.values(TODOList).filter( TODO  => !TODO.isDeleted)
-//     case "delete":
-//         return Object.values(TODOList).filter( TODO  => TODO.isDeleted)
-//     case "choosen":
-//         return Object.values(TODOList).filter( TODO  => (TODO.isChoosen && !TODO.isDeleted))
-//     default:
-//         return []
-// }
+module.exports = router;
