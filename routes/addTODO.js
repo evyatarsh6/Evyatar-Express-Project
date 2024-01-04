@@ -1,5 +1,6 @@
 const  { Router} = require('express')
-const {MongoClient} = require('mongodb');
+const {MongoClient} = require('mongodb')
+const bodyParser = require('body-parser')
 
 const uri = "mongodb://localhost:27017/"
 
@@ -11,31 +12,23 @@ const filterKind = database.collection('filterInfo').find()
 
 const router = Router();
 
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: true }));
+
+
+
+router.post('/', (req, res) => {
+  res.send(req.body)
+});
+
 router.get('/', (req, res) => {
   res.send('Got a GET request');
-});
-
-router.post('/', (req, res) => {
-  res.send('Got a POST request');
-});
-
-
-const reqValues = (req) => {
-  return {
-    "id": req.body.id,
-    "kind": req.body.kinf
-  }
-
-}
-
-
-router.post('/', (req, res) => {
-  res.send(`Got a new TODO with values: ${reqValues(req)}`);
 });
 
 router.delete('/', (req, res) => {
   res.send('Got a DELETE request at');
 });
+
 
 
 module.exports = router;
