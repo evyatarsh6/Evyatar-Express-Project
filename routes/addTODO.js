@@ -11,9 +11,21 @@ const filterKind = database.collection('filterInfo').find()
 
 const router = Router();
 
+router.get('/', (req, res) => {
+  res.send('Got a GET request');
+});
+
+router.post('/', (req, res) => {
+  res.send('Got a POST request');
+});
+
 router.put('/', (req, res) => {
-      res.send(Object.values(TODOList).filter((TODO) => !TODO.isDeleted));
-  }
-);
+  res.send('Got a PUT request at ');
+});
+
+router.delete('/', (req, res) => {
+  res.send('Got a DELETE request at');
+});
+
 
 module.exports = router;
