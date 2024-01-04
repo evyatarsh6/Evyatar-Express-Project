@@ -20,20 +20,18 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 
 router.post('/', (req, res) => {
-  const id = TODOList.insertOne(req.body)
-  res.send(id.insertedId)
+  // const id = TODOList.insertOne(req.body)
+  // res.send(id.insertedId)
   
-  const query = {
-    '_id': id
-  } 
+  // const query = {
+  //   '_id': id
+  // } 
   
-  const status = TODOList.findOne(query)
-  res.send(status)
+  // const status = TODOList.findOne(query)
+  // res.send(status)
 
+  res.send('avi')
 
-  // objectObject.keys(req.body)[0]
-  // }
-  // res.send(req.body)
 });
 
 router.get('/', (req, res) => {
