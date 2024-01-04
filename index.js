@@ -5,13 +5,13 @@ const app = express();
 const port = 3000;
 
 app.use(cors())
-// const visibleTODOS = require('./routes/visibleTODOS');
+const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
 
 
 
 app.use('/addTODO', addTODO)
-// app.use('/shownTODOS', visibleTODOS)
+app.use('/shownTODOS', visibleTODOS)
 
 
 app.listen(port, () => {
