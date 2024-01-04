@@ -19,8 +19,18 @@ router.post('/', (req, res) => {
   res.send('Got a POST request');
 });
 
-router.put('/', (req, res) => {
-  res.send('Got a PUT request at ');
+
+const reqValues = (req) => {
+  return {
+    "id": req.body.id,
+    "kind": req.body.kinf
+  }
+
+}
+
+
+router.post('/', (req, res) => {
+  res.send(`Got a new TODO with values: ${reqValues(req)}`);
 });
 
 router.delete('/', (req, res) => {
