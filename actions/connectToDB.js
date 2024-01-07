@@ -3,7 +3,7 @@ const {MongoClient} = require('mongodb')
 
 const uri = "mongodb://localhost:27017/"
 
-export const connectToDatabase = async () => {
+const connectToDatabase = async () => {
 
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -23,7 +23,8 @@ export const connectToDatabase = async () => {
   }
 }
 
-connectToDatabase();
+module.exports = {connectToDatabase}
+// connectToDatabase();
 
 
 

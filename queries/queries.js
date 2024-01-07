@@ -1,5 +1,4 @@
-
-export const generateFilterKindQuery = filterKind => {
+const generateFilterKindQuery = (filterKind) => {
     switch (filterKind) {
         case 'normal':
                 return {
@@ -11,7 +10,10 @@ export const generateFilterKindQuery = filterKind => {
             } 
         case 'choosen':
             return {
-                'isChoosen': true
-            } 
-    }
+                'isChoosen': true, "isDeleted": false} 
+                // $and: [{"isDeleted": false}]
+    } 
 }
+
+
+module.exports = {generateFilterKindQuery}

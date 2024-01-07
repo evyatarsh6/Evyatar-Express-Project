@@ -1,8 +1,7 @@
 
-import { connectToDatabase } from "./connectToDB";
+const connectToDatabase = require("./connectToDB") 
 
-
-export const getWantedCollection = async(collectionName) => {
+const getWantedCollection = async(collectionName) => {
 
     const db = connectToDatabase()
 
@@ -11,7 +10,7 @@ export const getWantedCollection = async(collectionName) => {
     return wantedCollection
 }
 
-export const getWantedDocumentsFromCollec = async(collectionName,query) => {
+const getWantedDocumentsFromCollec = async(collectionName,query) => {
 
     const collection = getWantedCollection(collectionName)
     
@@ -19,4 +18,6 @@ export const getWantedDocumentsFromCollec = async(collectionName,query) => {
 
     return wantedDocuments
 }
+
+module.exports = {getWantedCollection,  getWantedDocumentsFromCollec}
 

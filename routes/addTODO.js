@@ -1,7 +1,8 @@
 const  { Router} = require('express')
 const bodyParser = require('body-parser');
-const { connectToDatabase } = require('../actions/connectToDB');
 const { getWantedCollection } = require('../actions/getActions');
+const { postWantedCollection } = require('../actions/postActions');
+const { generateFilterKindQuery } = require('../queries/queries');
 
 
 
@@ -13,26 +14,27 @@ router.use(bodyParser.urlencoded({ extended: true }));
 const TODOList = getWantedCollection('TODOS')
 
 
-router.post('/', (req, res) => {
+router.post('/:filterKind', (req, res) => {
 
-  const id = TODOList.insertOne(req.body)
+  const newTODO =  Object.values(req.body)
   
-  const query = {
-    '_id': id.insertedId
-  } 
-  
+  postWantedCollection('TODOS', newTODO)
+
+  const filterKind = req.params.filterKind
+  const query = generateFilterKindQuery(filterKind)
+
   const status = TODOList.findOne(query)
   res.send(status)
 
 });
 
-router.get('/', (req, res) => {
-  res.send('Got a GET request');
-});
+// router.get('/', (req, res) => {
+//   res.send('Got a GET request');
+// });
 
-router.delete('/', (req, res) => {
-  res.send('Got a DELETE request at');
-});
+// router.delete('/', (req, res) => {
+//   res.send('Got a DELETE request at');
+// });
 
 
 
