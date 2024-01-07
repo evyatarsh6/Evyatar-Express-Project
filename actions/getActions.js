@@ -11,14 +11,10 @@ export const getWantedCollection = async(collectionName) => {
     return wantedCollection
 }
 
-export const getWantedDocumentsFromCollec = async(collectionName, fieldName, fieldValue) => {
+export const getWantedDocumentsFromCollec = async(collectionName,query) => {
 
-    const collection =  getWantedCollection(collectionName)
-
-    const query = {
-        [fieldName]: fieldValue
-    }
-
+    const collection = getWantedCollection(collectionName)
+    
     const wantedDocuments = collection.find(query) 
 
     return wantedDocuments

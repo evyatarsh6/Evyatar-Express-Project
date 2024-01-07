@@ -1,14 +1,7 @@
 const  { Router} = require('express')
-const {MongoClient} = require('mongodb')
-const bodyParser = require('body-parser')
-
-const uri = "mongodb://localhost:27017/"
-
-const client = new MongoClient(uri);
-
-const database = client.db('TODOLIST-Project-DB');
-const TODOList = database.collection('TODOS');
-const filterKind = database.collection('filterInfo').find()
+const bodyParser = require('body-parser');
+const { connectToDatabase } = require('../actions/connectToDB');
+const { getWantedCollection } = require('../actions/getActions');
 
 
 
@@ -17,6 +10,7 @@ const router = Router();
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
+const TODOList = getWantedCollection('TODOS')
 
 
 router.post('/', (req, res) => {
