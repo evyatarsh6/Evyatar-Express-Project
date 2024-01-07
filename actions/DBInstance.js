@@ -3,6 +3,8 @@ const {MongoClient} = require('mongodb')
 
 const uri = "mongodb://localhost:27017/"
 
+const DBInstance = {}
+
 const connectToDatabase = async () => {
 
   const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -13,7 +15,8 @@ const connectToDatabase = async () => {
 
     const database = client.db('TODOLIST-Project-DB');
 
-    return database
+    DataBase.db = database
+    // return database
   }
 
   finally {
@@ -23,8 +26,7 @@ const connectToDatabase = async () => {
   }
 }
 
-module.exports = {connectToDatabase}
-// connectToDatabase();
+module.exports = DBInstance
 
 
 

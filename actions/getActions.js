@@ -1,18 +1,16 @@
 
-const connectToDatabase = require("./connectToDB") 
+const DataBase = require("./DBInstance")
 
-const getWantedCollection = async(collectionName) => {
+const getWantedCollection = async (collectionName) => {
 
-    const db = connectToDatabase()
-
-    const wantedCollection = db.collection(collectionName);
+    const wantedCollection = DataBase.collection(collectionName);
 
     return wantedCollection
 }
 
-const getWantedDocumentsFromCollec = async(collectionName,query) => {
+const getWantedDocumentsFromCollec = async (collectionName,query) => {
 
-    const collection = getWantedCollection(collectionName)
+    const collection = await getWantedCollection(collectionName)
     
     const wantedDocuments = collection.find(query) 
 

@@ -11,11 +11,11 @@ const router = Router();
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const TODOList = getWantedCollection('TODOS')
 
 
 router.post('/:filterKind', (req, res) => {
-
+  
+  const TODOList = getWantedCollection('TODOS')
   const newTODO =  Object.values(req.body)
   
   postWantedCollection('TODOS', newTODO)
@@ -27,15 +27,5 @@ router.post('/:filterKind', (req, res) => {
   res.send(status)
 
 });
-
-// router.get('/', (req, res) => {
-//   res.send('Got a GET request');
-// });
-
-// router.delete('/', (req, res) => {
-//   res.send('Got a DELETE request at');
-// });
-
-
 
 module.exports = router;
