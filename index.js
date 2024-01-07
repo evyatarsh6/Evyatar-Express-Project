@@ -1,13 +1,22 @@
 const express = require('express');
 const cors = require('cors')
+const {MongoClient} = require('mongodb')
+const bodyParser = require('body-parser')
+
+const uri = "mongodb://localhost:27017/"
+
+const client = new MongoClient(uri);
 
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
+
+
 const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
-
 
 
 app.use('/addTODO', addTODO)

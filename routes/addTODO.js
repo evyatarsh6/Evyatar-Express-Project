@@ -22,7 +22,6 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.post('/', (req, res) => {
 
   const id = TODOList.insertOne(req.body)
-  // res.send(id.insertedId)
   
   const query = {
     '_id': id.insertedId
@@ -30,8 +29,6 @@ router.post('/', (req, res) => {
   
   const status = TODOList.findOne(query)
   res.send(status)
-
-  // res.send('avi')
 
 });
 
