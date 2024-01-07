@@ -1,9 +1,9 @@
 
-const DataBase = require("./DBInstance")
+const DataBase = require("./DBInstance").DBInstance
 
 const getWantedCollection = async (collectionName) => {
 
-    const wantedCollection = DataBase.collection(collectionName);
+    const wantedCollection = await DataBase.collection(collectionName);
 
     return wantedCollection
 }
