@@ -1,7 +1,14 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const initDB = require('./actions/DBInstance');
+const dbTODOS = require('./actions/DBInstance').dbConnection;
+
+const MongoClient = require('mongodb').MongoClient;
+
+const url = 'mongodb://localhost:27017/';
+const dbName = 'TODOLIST-Project-DB';
+
+const client = new MongoClient(url);
 
 
 const app = express();
@@ -12,8 +19,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 
-initDB.connectToDatabase()
-
 const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
 
@@ -21,40 +26,11 @@ const addTODO = require('./routes/addTODO');
 app.use('/addTODO', addTODO)
 app.use('/shownTODOS', visibleTODOS)
 
-
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Example app listening on port ${port}`);
+  
+  if (dbTODOS) {
+    console.log('DB is connected')
+  }
+  
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// app.get('/', (req, res) => {
-//   res.send('Got a GET request');
-// });
-
-// app.post('/', (req, res) => {
-//   res.send('Got a POST request');
-// });
-
-// app.put('/user', (req, res) => {
-//   res.send('Got a PUT request at /user');
-// });
-
-// app.delete('/user', (req, res) => {
-//   res.send('Got a DELETE request at /user');
-// });

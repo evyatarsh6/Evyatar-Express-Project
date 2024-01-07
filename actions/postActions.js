@@ -10,8 +10,6 @@ const getWantedCollection = require("./getActions")
     else{
         wantedCollection.insertOne(data)
     }
-
-    // return wantedCollection
 }
 
 
