@@ -1,5 +1,5 @@
 
-const dbTODOS = require('./DBInstance').dbConnection;
+const dbTODOS = require('./DBInstance');
 
 
 const getWantedCollection = async (collectionName) => {
