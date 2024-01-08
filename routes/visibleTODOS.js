@@ -10,7 +10,7 @@ router.get("/:filterKind", async (req, res) => {
 
   // let TODOSCollection = async () => await db.collection("TODOS");
   let TODOSCollection = async () => await db.collection("TODOS");
-  let results = await TODOSCollection.find(query)
+  let results = await TODOSCollection().find(query)
     .limit(50)
     .toArray();
   res.send(results).status(200);

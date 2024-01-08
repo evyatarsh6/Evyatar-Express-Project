@@ -1,31 +1,36 @@
-// const createDB = require('./createDB');
-
-// const getDB = async () => {
-//   const db = await createDB();
-//   return db
-// }
-
-// getDB();
-
-
-
 const { MongoClient } = require('mongodb');
 
-const uri = 'mongodb://localhost:27017';
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+// Replace 'your_database_name' with the actual name of your MongoDB database
+const dbUrl = 'mongodb://localhost:27017/TODOLIST-Project-DB';
 
-const connectAndQuery = async () => {
+async function connectToMongo(action, actionData) {
+  const client = new MongoClient(dbUrl
+    // , { useNewUrlParser: true, useUnifiedTopology: true }
+    );
   try {
     await client.connect();
-    const database = await client.db('TODOLIST-Project-DB');
-    const collection = await database.collection('TODOS');
+    console.log('Connected to MongoDB');
+
     
-    console.log(collection)
-    // Perform MongoDB operations here
-    
-  } finally {
+    const collectionExists = await client.db('TODOLIST-Project-DB')
+    .listCollections({ name: 'TODOS' }).hasNext();
+
+    console.log(collectionExists)
+    return collectionExists
+
+
+    // action(actionData)
+}
+    // You can now use the 'client' object to interact with your MongoDB database
+    // For example, you can perform operations like client.db('your_database_name').collection('your_collection_name').insertOne({...});
+
+  finally {
+    // Close the connection when done
     await client.close();
+    console.log('Disconnected from MongoDB');
   }
+
+
 }
 
-connectAndQuery();
+module.exports = connectToMongo;  
