@@ -3,16 +3,16 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const dbTODOS = require('./actions/DBInstance').dbConnection;
 
-const MongoClient = require('mongodb').MongoClient;
-
-const url = 'mongodb://localhost:27017/';
-const dbName = 'TODOLIST-Project-DB';
-
-const client = new MongoClient(url);
-
-
 const app = express();
 const port = 3000;
+
+const internals ={}
+
+exports.init = async () => {
+    internals.server = app
+    internals.db = await dbTODOS()
+}
+
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -28,7 +28,7 @@ app.use('/shownTODOS', visibleTODOS)
 
 app.listen(port, async () => {
   console.log(`Example app listening on port ${port}`);
-  
+  console.log(internals.db)
   if (dbTODOS) {
     console.log('DB is connected')
   }
