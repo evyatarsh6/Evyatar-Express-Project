@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const db = require('./createDB');
+const db =  require('./getDB')
 
 const app = express();
 const port = 3000;
@@ -20,8 +20,4 @@ app.use('/shownTODOS', visibleTODOS)
 
 app.listen(port, async () => {
   console.log(`Example app listening on port ${port}`);
-  if (db) {
-    console.log(db)
-  }
-  
 });
