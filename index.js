@@ -16,18 +16,33 @@ app.use(cors())
 
 
 
-app.use('/addTODO', addTODO)
-app.use('/shownTODOS', visibleTODOS)
+// app.use('/addTODO', addTODO)
+// app.use('/shownTODOS', visibleTODOS)
 
-// app.use('/shownTODOS/:filterKind', async (req, res) => {
-//   const database = await getDB();
-//   console.log('Collection exists:', database);
+app.use('/shownTODOS/:filterKind', async (req, res) => {
+  const filterKind = req.params.filterKind
+  const database =  await getDB()
+  const wantedCollection = database.collection("TODOS")
+  const query = generateFilterKindQuery(filterKind)
+  const results = await wantedCollection.findq(query)
+  res.send(results).status(200);
 
-//   const filterKind = req.params.filterKind
-//   const query = generateFilterKindQuery(filterKind)
-//   const updateData = database.collection
-//   res.send(database).status(200);
-// });
+
+
+
+
+
+
+
+
+  // const database = await getDB();
+  // console.log('Collection exists:', database);
+
+  // const filterKind = req.params.filterKind
+  // const query = generateFilterKindQuery(filterKind)
+  // const updateData = database.collection
+  // res.send(database).status(200);
+});
 
 
 
