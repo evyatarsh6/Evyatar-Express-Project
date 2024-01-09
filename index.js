@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const getDB =  require('./getDB')
 const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
+const { generateFilterKindQuery } = require('./queries/queries');
 
 const app = express();
 const port = 3000;
@@ -18,17 +19,15 @@ app.use(cors())
 app.use('/addTODO', addTODO)
 app.use('/shownTODOS', visibleTODOS)
 
+// app.use('/shownTODOS/:filterKind', async (req, res) => {
+//   const database = await getDB();
+//   console.log('Collection exists:', database);
 
-// app.use('/addTODO',(req, res) => {
-//   res.send('avi').status(200);
-// })
-
-app.use('/shownTODOS/:filterKind', async (req, res) => {
-  const filterKind = req.params.filterKind
-  const database = await getDB();
-  console.log('Collection exists:', collectionExists);
-  // res.send(database).status(200);
-});
+//   const filterKind = req.params.filterKind
+//   const query = generateFilterKindQuery(filterKind)
+//   const updateData = database.collection
+//   res.send(database).status(200);
+// });
 
 
 

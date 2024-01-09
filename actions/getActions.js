@@ -1,10 +1,13 @@
 
-const dbTODOS = require('./DBInstance');
+const getDB =  require('../getDB')
+
 
 
 const getWantedCollection = async (collectionName) => {
+    
+    const database = await getDB();
 
-    const wantedCollection = await dbTODOS.collection(collectionName);
+    const wantedCollection = await database.collection(collectionName);
 
     return wantedCollection
 }
@@ -13,7 +16,7 @@ const getWantedDocumentsFromCollec = async (collectionName,query) => {
 
     const collection = await getWantedCollection(collectionName)
     
-    const wantedDocuments = collection.find(query) 
+    const wantedDocuments = await collection.find(query) 
 
     return wantedDocuments
 }

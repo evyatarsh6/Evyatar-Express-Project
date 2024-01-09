@@ -1,6 +1,6 @@
 const  { Router} = require('express')
 const bodyParser = require('body-parser');
-const getDB =  require('./getDB')
+const { getWantedCollection } = require('../actions/getActions');
 
 
 const router = Router();
@@ -9,7 +9,7 @@ router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post("/", async (req, res) => {
-  let collection = await db.collection("TODOS");
+  let collection = await getWantedCollection('TODOS')
   let newTODO = req.body;
   const result = await collection.insertOne(newTODO)
   res.send(result).status(204);
