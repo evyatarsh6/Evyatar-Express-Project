@@ -1,24 +1,31 @@
+const connectToMongo = require('../initDB');
 
-const getDB =  require('../getDB')
-
-
+let db = null;
 
 const getWantedCollection = async (collectionName) => {
-    
-    const database = await getDB();
-
-    const wantedCollection = await database.collection(collectionName);
-
-    return wantedCollection
-}
+    try {
+        if (!db) {
+            db = await connectToMongo();
+        }
+        return db.collection(collectionName).toArray();
+    } catch (error) {
+        console.error("Error in getWantedCollection:", error);
+        throw error;
+    }
+};
 
 const getWantedDocumentsFromCollec = async (collectionName,query) => {
-
-    const collection = await getWantedCollection(collectionName)
+    try {
+        const collection = await getWantedCollection(collectionName)
+        const wantedDocuments = await collection.find(query).toArray() 
     
-    const wantedDocuments = await collection.find(query) 
+        return wantedDocuments
+        
+    } catch (error) {
 
-    return wantedDocuments
+        console.error("Error in getWantedDocumentsFromCollec:", error);
+        throw error;
+    }
 }
 
 module.exports = {getWantedCollection,  getWantedDocumentsFromCollec}

@@ -1,7 +1,6 @@
 const connectToMongo = require('./initDB');
 
 let db = null
-
 const getDB = async () => {
   if (db) {
     return db

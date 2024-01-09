@@ -1,16 +1,19 @@
-const getWantedCollection = require("./getActions") 
+const { getWantedCollection } = require('./getActions');
 
- const postWantedCollection = async (collectionName, data, numItems = 1 ) => {
+const postWantedCollection = async (collectionName, data, numItems = 1) => {
+    try {
+        const wantedCollection = await getWantedCollection(collectionName);
 
-    const wantedCollection = await getWantedCollection(collectionName)
-    
-    if (numItems!==1) {
-        wantedCollection.insert(data) 
+        if (numItems !== 1) {
+            await wantedCollection.insert(data);
+        } else {
+            await wantedCollection.insertOne(data);
+        }
+
+    } catch (error) {
+        console.error("Error in postWantedCollection:", error);
+        throw error;
     }
-    else{
-        wantedCollection.insertOne(data)
-    }
-}
+};
 
-
-module.exports = {postWantedCollection}
+module.exports = { postWantedCollection };
