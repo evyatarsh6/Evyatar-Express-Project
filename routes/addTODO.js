@@ -1,6 +1,6 @@
 const  { Router} = require('express')
 const bodyParser = require('body-parser');
-const db = require('../getDB');
+const getDB =  require('./getDB')
 
 
 const router = Router();
