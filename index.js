@@ -24,7 +24,7 @@ app.use('/shownTODOS/:filterKind', async (req, res) => {
   const database =  await getDB()
   const wantedCollection = database.collection("TODOS")
   const query = generateFilterKindQuery(filterKind)
-  const results = await wantedCollection.findq(query)
+  const results = await wantedCollection.find(query)
   res.send(results).status(200);
 
 

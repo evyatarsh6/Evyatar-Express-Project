@@ -7,7 +7,8 @@ const connectToMongo = async () =>
   const client = new MongoClient(dbUrl);
   let db = null
   try {
-    db = await client.connect();
+    await client.connect();
+    db = await client.db('TODOLIST-Project-DB')
     console.log('Connected to MongoDB');
     if (db) {
       return db
@@ -18,4 +19,4 @@ catch (err){
 }
 }
 
-module.exports = connectToMongo;  
+module.exports = connectToMongo; 
