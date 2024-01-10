@@ -1,0 +1,1 @@
+export const fromDBObjToArray = DBObj => DBObj.toArray()

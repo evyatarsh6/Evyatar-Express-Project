@@ -9,8 +9,9 @@ const postWantedCollection = async (collectionName, data, numItems = 1) => {
         } else {
             await wantedCollection.insertOne(data);
         }
-
-    } catch (error) {
+        return true
+    } 
+    catch (error) {
         console.error("Error in postWantedCollection:", error);
         throw error;
     }
