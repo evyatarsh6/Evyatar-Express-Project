@@ -4,9 +4,8 @@ const bodyParser = require('body-parser')
 const getDB =  require('./getDB')
 const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
-const { generateFilterKindQuery } = require('./queries/queries');
-const { getWantedDocumentsFromCollec } = require('./actions/getActions');
-
+const updateAllTODOS = require('./routes/updateAllTODOS')
+const updateWantedTODO = require('./routes/updateWantedTODO')
 const app = express();
 const port = 3000;
 
@@ -17,13 +16,8 @@ app.use(cors())
 
 app.use('/addTODO', addTODO)
 app.use('/shownTODOS', visibleTODOS)
-
-// app.use('/shownTODOS/:filterKind', async (req, res) => {
-//   const filterKind = req.params.filterKind
-//   const query = generateFilterKindQuery(filterKind)
-//   const results = getWantedDocumentsFromCollec('TODOS',query )
-//   res.send(results).status(200);
-// });
+app.use('/updateWantedTODO', updateWantedTODO)
+app.use('/updateAllTODOS', updateAllTODOS)
 
 
 

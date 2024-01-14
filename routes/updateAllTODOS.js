@@ -5,9 +5,8 @@ const { fromDBObjToArray } = require( '../utils/generalUtils');
 
 const router = Router();
 
-router.get("/:filterKind", async (req, res) => {
-  const filterKind = req.params.filterKind
-  const query = generateFilterKindQuery(filterKind)
+router.get("/", async (req, res) => {
+    
   const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query )
   const finalResults = await fromDBObjToArray(resultsDBObj)
   res.send(finalResults).status(200);
