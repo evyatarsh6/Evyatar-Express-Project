@@ -12,9 +12,11 @@ router.patch("/", async (req, res) => {
         'wantedField': wantedField,
         'wantedFieldUpdateVal': wantedFieldUpdateVal
     }
-    const WantedDocuquery = generateWantedDocuFromIDQuery(_id) 
+    const WantedDocuQuery =  {
+        "_id": _id
+    } 
 
-    const result = await patchWantedCollection('TODOS', WantedDocuquery, data )
+    const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
 
     if (result) {
       res.send('update successful').status(204);
