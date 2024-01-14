@@ -1,3 +1,5 @@
+const { ObjectId } = require("mongodb")
+
 const generateFilterKindQuery = (filterKind) => {
     switch (filterKind) {
         case 'normal':
@@ -11,9 +13,14 @@ const generateFilterKindQuery = (filterKind) => {
         case 'choosen':
             return {
                 'isChoosen': true, "isDeleted": false} 
-                // $and: [{"isDeleted": false}]
     } 
 }
 
+const generateWantedDocuFromIDQuery = _id => {
+    return {
+        "_id": ObjectId(`${_id}`)
+    }
+}
 
-module.exports = {generateFilterKindQuery}
+
+module.exports = {generateFilterKindQuery, generateWantedDocuFromIDQuery}
