@@ -22,7 +22,7 @@ app.use('/shownTODOS', visibleTODOS)
 app.use('/updateWantedTODO', updateWantedTODO)
 app.use('/updateAllTODOS', updateAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
-app.use('/getTODOSLocation', getTODOSLocation)
+// app.use('/getTODOSLocation', getTODOSLocation)
 
 
 
