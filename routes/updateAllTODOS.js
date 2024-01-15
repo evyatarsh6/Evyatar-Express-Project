@@ -19,7 +19,6 @@ router.patch("/", async (req, res) => {
 
     if (result) {
       res.send('update successful');
-      console.log(req.body)
     }
 });
 

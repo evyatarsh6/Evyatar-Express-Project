@@ -8,7 +8,9 @@ router.get("/:hoverID", async (req, res) => {
     const WantedDocuQuery = {
         _id: hoverID
     }
-    const result = await getWantedDocumentsFromCollec('TODOS', WantedDocuQuery)
+    const wantedProjection = {}
+
+    const result = await getWantedDocumentsFromCollec('TODOS', WantedDocuQuery, wantedProjection)
     if (result) {
       res.send(result);
     }

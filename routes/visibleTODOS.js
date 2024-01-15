@@ -8,7 +8,8 @@ const router = Router();
 router.get("/:filterKind", async (req, res) => {
   const filterKind = req.params.filterKind
   const query = generateFilterKindQuery(filterKind)
-  const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query )
+  const projection = {}
+  const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query, projection )
   const finalResults = await fromDBObjToArray(resultsDBObj)
   res.send(finalResults).status(200);
 });

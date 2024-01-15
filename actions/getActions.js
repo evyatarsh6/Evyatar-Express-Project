@@ -13,10 +13,10 @@ const getWantedCollection = async (collectionName) => {
     }
 };
 
-const getWantedDocumentsFromCollec = async (collectionName,query) => {
+const getWantedDocumentsFromCollec = async (collectionName,query, projection) => {
     try {
         const collection = await getWantedCollection(collectionName)
-        const wantedDocuments = await collection.find(query)
+        const wantedDocuments = await collection.find(query, projection)
     
         return wantedDocuments
         

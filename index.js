@@ -6,6 +6,7 @@ const addTODO = require('./routes/addTODO');
 const updateAllTODOS = require('./routes/updateAllTODOS')
 const updateWantedTODO = require('./routes/updateWantedTODO')
 const getTODOByHoverID = require('./routes/getTODOByHoverID')
+const getTODOSLocation = require('./routes/getTODOSLocation')
 
 
 const app = express();
@@ -20,10 +21,11 @@ app.use('/addTODO', addTODO)
 app.use('/shownTODOS', visibleTODOS)
 app.use('/updateWantedTODO', updateWantedTODO)
 app.use('/updateAllTODOS', updateAllTODOS)
-app.use('/getTODOByHoverID', getTODOByHoverID )
+app.use('/getTODOByHoverID', getTODOByHoverID)
+app.use('/getTODOSLocation', getTODOSLocation)
 
 
 
 app.listen(port, async () => {
-  console.log(`Example app listening on port ${port}`);
+  console.log(`app listening on port ${port}`);
 })

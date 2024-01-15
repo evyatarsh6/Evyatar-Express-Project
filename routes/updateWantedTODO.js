@@ -1,7 +1,4 @@
 const  { Router} = require('express')
-const { generateFilterKindQuery, generateWantedDocuFromIDQuery } = require('../queries/queries');
-const { getWantedDocumentsFromCollec } = require('../actions/getActions');
-const { fromDBObjToArray } = require( '../utils/generalUtils');
 const { patchWantedCollection } = require('../actions/patchActions');
 
 const router = Router();
@@ -21,7 +18,6 @@ router.patch("/", async (req, res) => {
 
     if (result) {
       res.send('update successful');
-      console.log(req.body)
     }
 });
 
