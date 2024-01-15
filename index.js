@@ -1,34 +1,31 @@
 const express = require('express');
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const visibleTODOS = require('./routes/visibleTODOS');
+const addTODO = require('./routes/addTODO');
+const updateAllTODOS = require('./routes/updateAllTODOS')
+const updateWantedTODO = require('./routes/updateWantedTODO')
+const getTODOByHoverID = require('./routes/getTODOByHoverID')
+const getTODOSLocation = require('./routes/getTODOSLocation')
+
 
 const app = express();
 const port = 3000;
 
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
-const visibleTODOS = require('./routes/visibleTODOS');
-const addTODO = require('./routes/addTODO');
 
 
-app.all('/addTODO', addTODO)
-app.all('/shownTODOS', visibleTODOS);
+app.use('/addTODO', addTODO)
+app.use('/shownTODOS', visibleTODOS)
+app.use('/updateWantedTODO', updateWantedTODO)
+app.use('/updateAllTODOS', updateAllTODOS)
+app.use('/getTODOByHoverID', getTODOByHoverID)
+// app.use('/getTODOSLocation', getTODOSLocation)
 
 
-// app.get('/', (req, res) => {
-//   res.send('Got a GET request');
-// });
 
-// app.post('/', (req, res) => {
-//   res.send('Got a POST request');
-// });
-
-// app.put('/user', (req, res) => {
-//   res.send('Got a PUT request at /user');
-// });
-
-// app.delete('/user', (req, res) => {
-//   res.send('Got a DELETE request at /user');
-// });
-
-// app.listen(port, () => {
-//   console.log(`Example app listening on port ${port}`);
-// });
+app.listen(port, async () => {
+  console.log(`app listening on port ${port}`);
+})

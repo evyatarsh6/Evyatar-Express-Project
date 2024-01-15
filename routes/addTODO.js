@@ -1,19 +1,20 @@
 const  { Router} = require('express')
-const {MongoClient} = require('mongodb');
+const bodyParser = require('body-parser');
+const { getWantedCollection } = require('../actions/getActions');
+const { postWantedCollection } = require('../actions/postActions');
 
-const uri = "mongodb://localhost:27017/"
-
-const client = new MongoClient(uri);
-
-const database = client.db('TODOLIST-Project-DB');
-const TODOList = database.collection('TODOS');
-const filterKind = database.collection('filterInfo').find()
 
 const router = Router();
 
-router.put('/', (req, res) => {
-      res.send(Object.values(TODOList).filter((TODO) => !TODO.isDeleted));
+router.use(bodyParser.json())
+router.use(bodyParser.urlencoded({ extended: true }));
+
+router.post("/", async (req, res) => {
+  let newTODO = req.body;
+  const result = await postWantedCollection('TODOS', newTODO)
+  if (result) {
+    res.send('update successful');
   }
-);
+});
 
 module.exports = router;
