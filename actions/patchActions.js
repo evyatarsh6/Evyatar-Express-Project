@@ -1,12 +1,12 @@
 const { getWantedCollection } = require('./getActions');
 
-const patchWantedCollection = async (collectionName, query, data, numItems = 1) => {
+const patchWantedCollection = async (collectionName, query, data, isMulti) => {
     try {
         const wantedCollection = await getWantedCollection(collectionName);
         const updateFieldsAction = { $set: {[data.wantedField]: data.wantedFieldUpdateVal}}
 
-        if (numItems !== 1) {
-            await wantedCollection.update(query,updateFieldsAction );
+        if (isMulti) {
+            await wantedCollection.updateMany(query,updateFieldsAction );
         } else {
             await wantedCollection.updateOne(query, updateFieldsAction);
         }

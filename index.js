@@ -1,7 +1,6 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const getDB =  require('./getDB')
 const visibleTODOS = require('./routes/visibleTODOS');
 const addTODO = require('./routes/addTODO');
 const updateAllTODOS = require('./routes/updateAllTODOS')

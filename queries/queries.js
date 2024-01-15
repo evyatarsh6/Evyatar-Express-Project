@@ -18,7 +18,7 @@ const generateFilterKindQuery = (filterKind) => {
 
 const generateWantedDocuFromIDQuery = _id => {
     return {
-        "_id": new ObjectId(_id)
+        "_id": _id
     }
 }
 

@@ -1,15 +1,26 @@
-const  { Router} = require('express')
-const { generateFilterKindQuery } = require('../queries/queries');
-const { getWantedDocumentsFromCollec } = require('../actions/getActions');
-const { fromDBObjToArray } = require( '../utils/generalUtils');
+const  { Router} = require('express');
+const { patchWantedCollection } = require('../actions/patchActions');
+
+
 
 const router = Router();
 
-router.get("/", async (req, res) => {
+router.patch("/", async (req, res) => {
     
-  const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query )
-  const finalResults = await fromDBObjToArray(resultsDBObj)
-  res.send(finalResults).status(200);
+    const {wantedField, wantedFieldUpdateVal} =  req.body
+    
+    const data = {
+        'wantedField': wantedField,
+        'wantedFieldUpdateVal': wantedFieldUpdateVal
+    }
+    const WantedDocuQuery = {}
+
+    const result = await patchWantedCollection('TODOS', WantedDocuQuery, data, true)
+
+    if (result) {
+      res.send('update successful').status(204);
+      console.log(req.body)
+    }
 });
 
 
