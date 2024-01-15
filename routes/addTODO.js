@@ -13,7 +13,7 @@ router.post("/", async (req, res) => {
   let newTODO = req.body;
   const result = await postWantedCollection('TODOS', newTODO)
   if (result) {
-    res.send('update successful').status(204);
+    res.send('update successful');
   }
 });
 

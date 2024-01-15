@@ -20,7 +20,7 @@ router.patch("/", async (req, res) => {
     const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
 
     if (result) {
-      res.send('update successful').status(204);
+      res.send('update successful');
       console.log(req.body)
     }
 });
