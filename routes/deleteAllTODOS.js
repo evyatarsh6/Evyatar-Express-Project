@@ -10,7 +10,7 @@ const router = Router();
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.post("/", async () => {
+router.delete("/", async () => {
     const TODOSCollection = await getWantedCollection('TODOS')
     await TODOSCollection.deleteMany({})
     if (error) {
