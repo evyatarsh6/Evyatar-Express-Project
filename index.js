@@ -6,7 +6,8 @@ const addTODO = require('./routes/addTODO');
 const updateAllTODOS = require('./routes/updateAllTODOS')
 const updateWantedTODO = require('./routes/updateWantedTODO')
 const getTODOByHoverID = require('./routes/getTODOByHoverID')
-const getTODOSLocation = require('./routes/getTODOSLocation')
+const deleteAllTODOS = require('./routes/deleteAllTODOS')
+// const getTODOSLocation = require('./routes/getTODOSLocation')
 
 
 const app = express();
