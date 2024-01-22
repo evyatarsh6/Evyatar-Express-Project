@@ -6,13 +6,20 @@ const postWantedCollection = async (collectionName, data, numItems = 1) => {
 
         if (numItems !== 1) {
             const result = await wantedCollection.insert(data);
-            if (result.acknowledged ) {
+            if (result ) {
                 return true
             }
+            else{
+                return false
+            }
+
         } else {
             const result = await wantedCollection.insertOne(data);
-            if (result.acknowledged ) {
+            if (result) {
                 return true
+            }
+            else{
+                return false
             }
         }
     } 

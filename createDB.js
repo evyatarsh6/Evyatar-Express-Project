@@ -10,7 +10,6 @@ const connectToDatabase = async(callback) => {
   try {
     const connect = await client.connect()
     const a = connect.db(dbName)
-    console.log(a)
   }
   catch (err) {
     console.error(err);
