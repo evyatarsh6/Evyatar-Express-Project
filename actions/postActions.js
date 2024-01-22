@@ -5,11 +5,16 @@ const postWantedCollection = async (collectionName, data, numItems = 1) => {
         const wantedCollection = await getWantedCollection(collectionName);
 
         if (numItems !== 1) {
-            await wantedCollection.insert(data);
+            const result = await wantedCollection.insert(data);
+            if (result.acknowledged ) {
+                return true
+            }
         } else {
-            await wantedCollection.insertOne(data);
+            const result = await wantedCollection.insertOne(data);
+            if (result.acknowledged ) {
+                return true
+            }
         }
-        return true
     } 
     catch (error) {
         console.error("Error in postWantedCollection:", error);

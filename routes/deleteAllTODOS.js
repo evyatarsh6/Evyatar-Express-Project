@@ -1,8 +1,6 @@
 const  { Router} = require('express')
 const bodyParser = require('body-parser');
 const { getWantedCollection } = require('../actions/getActions');
-const { postWantedCollection } = require('../actions/postActions');
-const { error } = require('console');
 
 
 const router = Router();

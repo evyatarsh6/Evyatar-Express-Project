@@ -1,12 +1,14 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const visibleTODOS = require('./routes/visibleTODOS');
-const addTODO = require('./routes/addTODO');
-const updateAllTODOS = require('./routes/updateAllTODOS')
-const updateWantedTODO = require('./routes/updateWantedTODO')
+
+const getVisibleTODOS = require('./routes/getvisibleTODOS');
 const getTODOByHoverID = require('./routes/getTODOByHoverID')
-const deleteAllTODOS = require('./routes/deleteAllTODOS')
+const postTODO = require('./routes/postTODO');
+const patchFieldAllTODOS = require('./routes/patchFieldAllTODOS')
+const patchFieldWantedTODO = require('./routes/patchFieldWantedTODO')
+const putWantedTODO = require('./routes/putWantedTODO')
+// const deleteAllTODOS = require('./routes/deleteAllTODOS')
 
 
 const app = express();
@@ -17,12 +19,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 
-app.use('/addTODO', addTODO)
-app.use('/shownTODOS', visibleTODOS)
-app.use('/updateWantedTODO', updateWantedTODO)
-app.use('/updateAllTODOS', updateAllTODOS)
+app.use('/postTODO', postTODO)
+app.use('/getShownTODOS', getVisibleTODOS)
+app.use('/patchFieldWantedTODO', patchFieldWantedTODO)
+app.use('/patchFieldAllTODOS', patchFieldAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
-app.use('/deleteAllTODOS', deleteAllTODOS)
+app.use('/putWantedTODO', putWantedTODO )
+// app.use('/deleteAllTODOS', deleteAllTODOS)
 
 
 
