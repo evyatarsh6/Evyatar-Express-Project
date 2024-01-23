@@ -1,20 +1,17 @@
 const  { Router} = require('express')
 const { patchWantedCollection } = require('../actions/patchActions');
+const { putWantedCollection } = require('../actions/putActions');
 
 const router = Router();
 
 router.put("/", async (req, res) => {
-    const {_id, wantedField, wantedFieldUpdateVal} =  req.body
+    const {_id} =  req.body
     
-    const data = {
-        'wantedField': wantedField,
-        'wantedFieldUpdateVal': wantedFieldUpdateVal
-    }
     const WantedDocuQuery =  {
         "_id": _id
     } 
 
-    const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
+    const result = await putWantedCollection('TODOS', WantedDocuQuery, req.body )
 
     if (result) {
       res.send('update successful');

@@ -10,8 +10,7 @@ router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
 router.post("/", async (req, res) => {
-  let newTODO = req.body;
-  const result = await postWantedCollection('TODOS', newTODO)
+  const result = await postWantedCollection('TODOS', req.body)
   if (result) {
     res.send('update successful');
   }
