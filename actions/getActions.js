@@ -1,4 +1,4 @@
-const getDB = require('../getDB');
+const getDB = require('../DB/getDB');
 
 let db = null;
 

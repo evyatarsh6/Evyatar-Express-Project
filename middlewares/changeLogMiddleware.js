@@ -1,20 +1,31 @@
 
+
+const express = require('express');
+const cors = require('cors')
+const bodyParser = require('body-parser')
+const { getWantedDocumentsFromCollec } = require('../actions/getActions');
+const { postWantedCollection } = require('../actions/postActions');
+const { error } = require('console');
+const {fromDBObjToArray} = require('../utils/generalUtils')
+
+
 const changeLog = async (req,res,next) => {
     const allowedMethods = ['PATCH', 'PUT', 'POST', 'Delete'];
-    const chnageLogID = new Date()
+    const changeTimeStamp = new Date()
+    const changeLogID = Date.now()
 
     if (allowedMethods.includes(req.method)) {
         
-        if (req.method === 'Post') {
+        if (req.method === 'POST') {
             const {_id, kind} =  req.body
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {
-                changeID :chnageLogID,
-                changeType : 'Post',
+                _id :changeLogID,
+                changeType : 'POST',
                 TODOID : _id,
                 TODOKind:  kind,
-                timeStanp :chnageLogID
+                timeStanp :changeTimeStamp
                 
             }
             )
@@ -34,10 +45,10 @@ const changeLog = async (req,res,next) => {
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {
-                changeID :chnageLogID,
-                changeType : 'Post',
+                _id :changeLogID,
+                changeType : 'PUT',
                 TODOID : _id,
-                timeStanp :chnageLogID
+                timeStanp :changeTimeStamp
                 
             }
             )
@@ -51,7 +62,7 @@ const changeLog = async (req,res,next) => {
             }
         }
 
-        else if (req.method === 'Patch') {
+        else if (req.method == 'PATCH') {
 
             const {_id, wantedField, wantedFieldUpdateVal} =  req.body
 
@@ -62,22 +73,26 @@ const changeLog = async (req,res,next) => {
             [wantedField]: 1
             }
 
-            const prevValue = await getWantedDocumentsFromCollec('TODOS', WantedDocuQuery, prevValueProjection)
-            
+            const prevValueDBObj = await getWantedDocumentsFromCollec
+            (
+                'TODOS', WantedDocuQuery, prevValueProjection
+            )
+
+            const prevValue = await fromDBObjToArray(prevValueDBObj)
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {
-                changeID :chnageLogID,
+                _id :changeLogID,
+                changeType : 'PATCH',
                 TODOID : _id,
                 changedField: wantedField,
                 values: {
                 prevValue : prevValue,
                 newValue : wantedFieldUpdateVal
                 },
-                timeStanp :chnageLogID
+                timeStanp :changeTimeStamp
                 
-            }
-            )
+            })
 
             if (updateChangeLog) {
             console.log('update changeLog succeed')

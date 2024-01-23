@@ -11,8 +11,8 @@ const getDeltas = require('./routes/getDeltas')
 const postTODO = require('./routes/postTODO');
 const patchFieldWantedTODO = require('./routes/patchFieldWantedTODO')
 const putWantedTODO = require('./routes/putWantedTODO')
-const { postWantedCollection } = require('../Evyatar-Express-Project/actions/postActions');
-const { error } = require('console');
+// const { postWantedCollection } = require('../Evyatar-Express-Project/actions/postActions');
+// const { error } = require('console');
 // const deleteAllTODOS = require('./routes/deleteAllTODOS')
 
 
@@ -24,7 +24,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 
-app.use('/changeLog', async (req, res, next) => changLogMiddleware(req, res, next));
+app.use(async (req, res, next) => changLogMiddleware(req, res, next));
 
 
 app.use('/postTODO', postTODO)
