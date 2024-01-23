@@ -7,9 +7,18 @@ const { getWantedCollection } = require('../actions/getActions');
 
 
 
+const generateOparation = async (operationType, collectionName, ...attr) => {
+    return await getWantedCollection(collectionName)[operationType](...attr)
+    .toArray();
+};
+
+
+
 const basicDBCollactionOparations = (collactionName) =>  {
     const oparations = {
-        countDocuments: async (...attr) => await getWantedCollection(collactionName).countDocuments(...attr).toArray(),
+        
+        // countDocuments: generateOparation('countDocuments',collactionName,...attr)
+        countDocuments: async (...attr) => await getWantedCollection(collactionName).countDocuments(...attr),
         findOpatations: {
             findOne: async (...attr) => await getWantedCollection(collactionName).findOne(...attr).toArray(),
             find: async (...attr) => await getWantedCollection(collactionName).find(...attr).toArray(),
