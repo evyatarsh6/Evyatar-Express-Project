@@ -3,7 +3,7 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { getWantedDocumentsFromCollec } = require('../actions/getActions');
+const { getUnicDocumentFromCollec } = require('../actions/getActions');
 const { postWantedCollection } = require('../actions/postActions');
 const { error } = require('console');
 const {fromDBObjToArray} = require('../utils/generalUtils')
@@ -70,15 +70,15 @@ const changeLog = async (req,res,next) => {
             _id: _id
             }
             const prevValueProjection = {
-            [wantedField]: 1
+            [wantedField]: 1, 
+            _id: 0
             }
 
-            const prevValueDBObj = await getWantedDocumentsFromCollec
+            const prevValue = await getUnicDocumentFromCollec
             (
                 'TODOS', WantedDocuQuery, prevValueProjection
             )
 
-            const prevValue = await fromDBObjToArray(prevValueDBObj)
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {

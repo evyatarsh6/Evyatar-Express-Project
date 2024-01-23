@@ -27,5 +27,20 @@ const getWantedDocumentsFromCollec = async (collectionName,query, projection) =>
     }
 }
 
-module.exports = {getWantedCollection,  getWantedDocumentsFromCollec}
+
+const getUnicDocumentFromCollec = async (collectionName,query, projection) => {
+    try {
+        const collection = await getWantedCollection(collectionName)
+        const wantedDocuments = await collection.findOne(query, projection)
+    
+        return wantedDocuments
+        
+    } catch (error) {
+
+        console.error("Error in getWantedDocumentsFromCollec:", error);
+        throw error;
+    }
+}
+
+module.exports = {getWantedCollection,  getWantedDocumentsFromCollec, getUnicDocumentFromCollec}
 
