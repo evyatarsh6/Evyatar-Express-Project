@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
 
-app.use(async (req, res, next) => changLogMiddleware(req, res, next));
+app.use(async (req, res, next) => await changLogMiddleware(req, res, next));
 
 
 app.use('/postTODO', postTODO)

@@ -10,14 +10,14 @@ const {fromDBObjToArray} = require('../utils/generalUtils')
 
 
 const changeLog = async (req,res,next) => {
-    const allowedMethods = ['PATCH', 'PUT', 'POST', 'Delete'];
+    const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
     const changeTimeStamp = new Date()
     const changeLogID = Date.now()
 
     if (allowedMethods.includes(req.method)) {
         
         if (req.method === 'POST') {
-            const {_id, kind} =  req.body
+            const { _id, kind } = req.body || {};
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {
@@ -41,7 +41,7 @@ const changeLog = async (req,res,next) => {
 
         else if (req.method === 'PUT') {
 
-            const {_id} =  req.body
+            const {_id} =  req.body || {}
             const updateChangeLog = await postWantedCollection(
             'changeLog',
             {
@@ -64,7 +64,7 @@ const changeLog = async (req,res,next) => {
 
         else if (req.method == 'PATCH') {
 
-            const {_id, wantedField, wantedFieldUpdateVal} =  req.body
+            const {_id, wantedField, wantedFieldUpdateVal} =  req.body || {}
 
             const WantedDocuQuery = {
             _id: _id
