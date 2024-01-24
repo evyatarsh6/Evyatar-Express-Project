@@ -33,6 +33,11 @@ const generateDBOperation = async (operationType, collectionName, ...attr) => {
     }
 };
 
+const fromDBObjToArray = async (DBObj) =>{
+    const arr = await DBObj.toArray()
+    return arr
+}
+
 const basicDBCollactionOperations = async (collactionName) =>  {
 
     const getDBCollection = async () => await getWantedCollection(collactionName)
@@ -43,12 +48,12 @@ const basicDBCollactionOperations = async (collactionName) =>  {
         countDocuments: async (...attr) => collection.countDocuments(...attr),
         findOne: async (...attr) => {
             const DBObj = collection.findOne(...attr)
-            const resultArr = await DBObj.toArray()
+            const resultArr = await fromDBObjToArray(DBObj)
             return resultArr
         },
         find: async (...attr) => {
             const DBObj = collection.find(...attr)
-            const resultArr = await DBObj.toArray()
+            const resultArr = await fromDBObjToArray(DBObj)
             return resultArr
         },
         deleteOne: async (...attr) => collection.deleteOne(...attr),
