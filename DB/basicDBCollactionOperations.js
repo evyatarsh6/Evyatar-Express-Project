@@ -38,15 +38,19 @@ const basicDBCollactionOperations = async (collactionName) =>  {
     const getDBCollection = async () => await getWantedCollection(collactionName)
     const collection = await getDBCollection()
 
-    const findOneTest = collection.findOne({})
-    const avi = findOneTest.toArray()
-    console.log(avi)
-
     const operations = {
 
         countDocuments: async (...attr) => collection.countDocuments(...attr),
-        findOne: async (...attr) => collection.findOne(...attr).toArray(),
-        find: async (...attr) => collection.find(...attr).toArray(),
+        findOne: async (...attr) => {
+            const DBObj = collection.findOne(...attr)
+            const resultArr = await DBObj.toArray()
+            return resultArr
+        },
+        find: async (...attr) => {
+            const DBObj = collection.find(...attr)
+            const resultArr = await DBObj.toArray()
+            return resultArr
+        },
         deleteOne: async (...attr) => collection.deleteOne(...attr),
         deleteMany: async (...attr) => collection.deleteMany(...attr),
         insertOne: async (...attr) => collection.insertOne(...attr),
