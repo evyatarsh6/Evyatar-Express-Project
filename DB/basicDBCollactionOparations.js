@@ -3,44 +3,64 @@
 const express = require('express');
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const { getWantedCollection } = require('../actions/getActions');
+
+const getDB = require('../DB/getDB');
+
+let db = null;
+
+const getWantedCollection = async (collectionName) => {
+    try {
+        db = await getDB()
+        const wantedCollection = await db.collection(collectionName) 
+        return wantedCollection
+    } catch (error) {
+        console.error("Error in getWantedCollection:", error);
+        throw error;
+    }
+};
 
 
 
-// const generateOparation = async (operationType, collectionName, ...attr) => {
-//     return await getWantedCollection(collectionName)[operationType](...attr)
-//     .toArray();
-// };
+const generateOparation = async (operationType, collectionName, ...attr) => {
+    try {
+        const action =  await basicDBCollactionOparations(collectionName)[operationType](...attr)
+        return action
+    } catch (error) {
+        console.error(`error in the ${operationType} oparation in ${collectionName} collection`)
+        throw error
+    }
+};
 
 
 
 const basicDBCollactionOparations = (collactionName) =>  {
+
+    const getDBCollection = async () => await getWantedCollection(collactionName)
+
     const oparations = {
-        
-        // countDocuments: generateOparation('countDocuments',collactionName,...attr)
-        countDocuments: async (...attr) => await getWantedCollection(collactionName).countDocuments(...attr),
+        countDocuments: async (...attr) => await getDBCollection().countDocuments(...attr),
         findOpatations: {
-            findOne: async (...attr) => await getWantedCollection(collactionName).findOne(...attr).toArray(),
-            find: async (...attr) => await getWantedCollection(collactionName).find(...attr).toArray(),
+            findOne: async (...attr) => await getDBCollection().findOne(...attr).toArray(),
+            find: async (...attr) => await getDBCollection().find(...attr).toArray(),
         },
         deleteOpatations: {
-            deleteOne: async (...attr) => await getWantedCollection(collactionName).deleteOne(...attr),
-            deleteMany: async (...attr) => await getWantedCollection(collactionName).deleteMany(...attr),
+            deleteOne: async (...attr) => await getDBCollection().deleteOne(...attr),
+            deleteMany: async (...attr) => await getDBCollection().deleteMany(...attr),
         },
         insertOpatarions: {
-            insertOne: async (...attr) => await getWantedCollection(collactionName).insertOne(...attr),
-            insertMany: async (...attr) => await getWantedCollection(collactionName).insertMany(...attr),
+            insertOne: async (...attr) => await getDBCollection().insertOne(...attr),
+            insertMany: async (...attr) => await getDBCollection().insertMany(...attr),
         },
-        remove: async (...attr) => await getWantedCollection(collactionName).remove(...attr),
-        renameCollection:  async (...attr) => await getWantedCollection(collactionName).renameCollection(...attr),
+        remove: async (...attr) => await getDBCollection().remove(...attr),
+        renameCollection:  async (...attr) => await getDBCollection().renameCollection(...attr),
         updateOparations: {
-            updateOne: async (...attr) => await getWantedCollection(collactionName).updateOne(...attr),
-            updateMany: async (...attr) => await getWantedCollection(collactionName).updateMany(...attr),
+            updateOne: async (...attr) => await getDBCollection().updateOne(...attr),
+            updateMany: async (...attr) => await getDBCollection().updateMany(...attr),
         },
         findOneAndOparations: {
-            findOneAndDelete: async (...attr) => await getWantedCollection(collactionName).findOneAndDelete(...attr),
-            findOneAndReplace: async (...attr) => await getWantedCollection(collactionName).findOneAndReplace(...attr),
-            findOneAndUpdate: async (...attr) => await getWantedCollection(collactionName).findOneAndUpdate(...attr),
+            findOneAndDelete: async (...attr) => await getDBCollection().findOneAndDelete(...attr),
+            findOneAndReplace: async (...attr) => await getDBCollection().findOneAndReplace(...attr),
+            findOneAndUpdate: async (...attr) => await getDBCollection().findOneAndUpdate(...attr),
         }
 
     }
@@ -49,4 +69,4 @@ const basicDBCollactionOparations = (collactionName) =>  {
 }
 
 
-module.exports = basicDBCollactionOparations;
+module.exports = {basicDBCollactionOparations, generateOparation};

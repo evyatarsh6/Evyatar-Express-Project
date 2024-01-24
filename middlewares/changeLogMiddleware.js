@@ -1,11 +1,13 @@
 const { getUnicDocumentFromCollec } = require('../actions/getActions');
 const { postWantedCollection } = require('../actions/postActions');
 const { error } = require('console');
-const basicDBCollactionOparations = require('../DB/basicDBCollactionOparations');
+const {generateOparation} = require('../DB/basicDBCollactionOparations');
+const { putWantedCollection } = require('../actions/putActions');
 
 
 const changeLog = async (req,res,next) => {
     const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
+
     const changeTimeStamp = new Date()
     const changeLogID = Date.now()
 
@@ -13,18 +15,17 @@ const changeLog = async (req,res,next) => {
         
         if (req.method === 'POST') {
             const { _id, kind } = req.body || {};
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
+            const updateChangeLog = await generateOparation(
+                'insertOne',
+                'changeLog',
+                {
                 _id :changeLogID,
                 changeType : 'POST',
                 TODOID : _id,
                 TODOKind:  kind,
                 timeStanp :changeTimeStamp
-                
-            }
+                }
             )
-
             if (updateChangeLog) {
             console.log('update changeLog succeed')
             }
@@ -37,15 +38,16 @@ const changeLog = async (req,res,next) => {
         else if (req.method === 'PUT') {
 
             const {_id} =  req.body || {}
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
-                _id :changeLogID,
-                changeType : 'PUT',
-                TODOID : _id,
-                timeStanp :changeTimeStamp
-                
-            }
+
+            const updateChangeLog = await generateOparation(
+                'insertOne',
+                'changeLog',
+                {
+                    _id :changeLogID,
+                    changeType : 'PUT',
+                    TODOID : _id,
+                    timeStanp :changeTimeStamp
+                }
             )
 
             if (updateChangeLog) {
@@ -69,25 +71,26 @@ const changeLog = async (req,res,next) => {
             _id: 0
             }
 
-            const prevValue = await getUnicDocumentFromCollec
-            (
-                'TODOS', WantedDocuQuery, prevValueProjection
-            )
+            // const prevValue = await getUnicDocumentFromCollec
+            // (
+            //     'TODOS', WantedDocuQuery, prevValueProjection
+            // )
 
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
-                _id :changeLogID,
-                changeType : 'PATCH',
-                TODOID : _id,
-                changedField: wantedField,
-                values: {
-                prevValue : prevValue,
-                newValue : wantedFieldUpdateVal
-                },
-                timeStanp :changeTimeStamp
-                
-            })
+            const updateChangeLog = await generateOparation(
+                'insertOne',
+                'changeLog',
+                {
+                    _id :changeLogID,
+                    changeType : 'PATCH',
+                    TODOID : _id,
+                    changedField: wantedField,
+                    values: {
+                    prevValue : prevValue,
+                    newValue : wantedFieldUpdateVal
+                    },
+                    timeStanp :changeTimeStamp
+                }
+            )
 
             if (updateChangeLog) {
             console.log('update changeLog succeed')

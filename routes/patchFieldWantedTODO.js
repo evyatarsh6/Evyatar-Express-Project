@@ -14,7 +14,13 @@ router.patch("/", async (req, res) => {
         "_id": _id
     } 
 
-    const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
+    // const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
+    const result = await generateOparation(
+        'updateOne',
+        'TODOS',
+        [WantedDocuQuery],
+        [data]
+      )
 
     if (result) {
       res.send('update successful');
