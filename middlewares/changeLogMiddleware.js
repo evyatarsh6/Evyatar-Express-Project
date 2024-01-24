@@ -68,12 +68,12 @@ const changeLog = async (req,res,next) => {
             [wantedField]: 1, 
             }
 
-            const prevValue = await generateDBOperation(
-                'findOne',
-                'TODOS',
-                WantedDocuQuery,
-                prevValueProjection
-            )
+            // const prevValue = await generateDBOperation(
+            //     'findOne',
+            //     'TODOS',
+            //     WantedDocuQuery,
+            //     prevValueProjection
+            // )
 
             const updateChangeLog = await generateDBOperation(
                 'insertOne',
@@ -84,7 +84,8 @@ const changeLog = async (req,res,next) => {
                     TODOID : _id,
                     changedField: wantedField,
                     values: {
-                    prevValue : prevValue,
+                    // prevValue : prevValue,
+                    prevValue : 'avi',
                     newValue : wantedFieldUpdateVal
                     },
                     timeStanp :changeTimeStamp

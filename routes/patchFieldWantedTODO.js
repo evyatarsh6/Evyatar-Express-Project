@@ -1,5 +1,4 @@
 const  { Router} = require('express')
-const { patchWantedCollection } = require('../actions/patchActions');
 const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 const router = Router();
@@ -15,12 +14,14 @@ router.patch("/", async (req, res) => {
         "_id": _id
     } 
 
+    const operation = { $set: {[data.wantedField]: data.wantedFieldUpdateVal}}
+
     // const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
     const result = await generateDBOperation(
         'updateOne',
         'TODOS',
         WantedDocuQuery,
-        data
+        operation
       )
 
     if (result) {
