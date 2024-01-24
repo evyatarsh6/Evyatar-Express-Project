@@ -2,7 +2,7 @@ const  { Router} = require('express')
 const { generateFilterKindQuery } = require('../queries/queries');
 const { getWantedDocumentsFromCollec } = require('../actions/getActions');
 const { fromDBObjToArray } = require( '../utils/generalUtils');
-const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
+const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 const router = Router();
 
@@ -11,7 +11,7 @@ router.get("/:filterKind", async (req, res) => {
   const filterKind = req.params.filterKind
   const query = generateFilterKindQuery(filterKind)
   const projection = {}
-  const result = await generateDBOparation(
+  const result = await generateDBOperation(
     'find',
     'TODOS',
     query,

@@ -21,23 +21,23 @@ const getWantedCollection = async (collectionName) => {
 
 
 
-const generateDBOparation = async (operationType, collectionName, ...attr) => {
+const generateDBOperation = async (operationType, collectionName, ...attr) => {
     try {
-        const action =  await basicDBCollactionOparations(collectionName)[operationType](...attr)
+        const action =  basicDBCollactionOperations(collectionName)[operationType](...attr)
         return action
     } catch (error) {
-        console.error(`error in the ${operationType} oparation in ${collectionName} collection`)
+        console.error(`error in the ${operationType} operation in ${collectionName} collection`)
         throw error
     }
 };
 
 
 
-const basicDBCollactionOparations = (collactionName) =>  {
+const basicDBCollactionOperations = (collactionName) =>  {
 
     const getDBCollection = async () => await getWantedCollection(collactionName)
-
-    const oparations = {
+    
+    const operations = {
         countDocuments: async (...attr) => await getDBCollection().countDocuments(...attr),
         findOpatations: {
             findOne: async (...attr) => await getDBCollection().findOne(...attr).toArray(),
@@ -53,20 +53,19 @@ const basicDBCollactionOparations = (collactionName) =>  {
         },
         remove: async (...attr) => await getDBCollection().remove(...attr),
         renameCollection:  async (...attr) => await getDBCollection().renameCollection(...attr),
-        updateOparations: {
+        updateOperations: {
             updateOne: async (...attr) => await getDBCollection().updateOne(...attr),
             updateMany: async (...attr) => await getDBCollection().updateMany(...attr),
         },
-        findOneAndOparations: {
+        findOneAndOperations: {
             findOneAndDelete: async (...attr) => await getDBCollection().findOneAndDelete(...attr),
             findOneAndReplace: async (...attr) => await getDBCollection().findOneAndReplace(...attr),
             findOneAndUpdate: async (...attr) => await getDBCollection().findOneAndUpdate(...attr),
         }
 
     }
-    return oparations
-    
+    return operations 
 }
 
 
-module.exports = {basicDBCollactionOparations, generateDBOparation};
+module.exports = {basicDBCollactionOperations, generateDBOperation};

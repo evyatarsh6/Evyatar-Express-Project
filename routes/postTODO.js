@@ -1,6 +1,6 @@
 const  { Router} = require('express')
 const bodyParser = require('body-parser');
-const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
+const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 
 const router = Router();
@@ -12,7 +12,7 @@ router.post("/", async (req, res) => {
 
   // const result = await postWantedCollection('TODOS', req.body)
 
-  const result = await generateDBOparation(
+  const result = await generateDBOperation(
     'insertOne',
     'TODOS',
     req.body

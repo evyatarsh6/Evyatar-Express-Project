@@ -1,5 +1,5 @@
 const  { Router} = require('express');
-const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
+const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 const router = Router();
 
@@ -13,7 +13,7 @@ router.put("/", async (req, res) => {
       // const result = await putWantedCollection('TODOS', WantedDocuQuery, req.body )
 
 
-    const result =  await generateDBOparation(
+    const result =  await generateDBOperation(
       'findOneAndReplace',
       'TODOS',
       WantedDocuQuery,

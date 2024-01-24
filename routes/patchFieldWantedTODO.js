@@ -1,6 +1,6 @@
 const  { Router} = require('express')
 const { patchWantedCollection } = require('../actions/patchActions');
-const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
+const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 const router = Router();
 
@@ -16,7 +16,7 @@ router.patch("/", async (req, res) => {
     } 
 
     // const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
-    const result = await generateDBOparation(
+    const result = await generateDBOperation(
         'updateOne',
         'TODOS',
         WantedDocuQuery,

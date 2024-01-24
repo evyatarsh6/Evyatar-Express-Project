@@ -1,5 +1,5 @@
 const  { Router} = require('express');
-const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
+const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
 const router = Router();
 
@@ -7,7 +7,7 @@ router.get("/", async (req, res) => {
 const query = {}
   const projection = {}
 
-  const result = await generateDBOparation(
+  const result = await generateDBOperation(
     'find',
     'TODOS',
     query,
