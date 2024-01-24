@@ -7,10 +7,10 @@ const { getWantedCollection } = require('../actions/getActions');
 
 
 
-const generateOparation = async (operationType, collectionName, ...attr) => {
-    return await getWantedCollection(collectionName)[operationType](...attr)
-    .toArray();
-};
+// const generateOparation = async (operationType, collectionName, ...attr) => {
+//     return await getWantedCollection(collectionName)[operationType](...attr)
+//     .toArray();
+// };
 
 
 
