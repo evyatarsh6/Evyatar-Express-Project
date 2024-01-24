@@ -36,23 +36,24 @@ const generateDBOperation = async (operationType, collectionName, ...attr) => {
 const basicDBCollactionOperations = async (collactionName) =>  {
 
     const getDBCollection = async () => await getWantedCollection(collactionName)
-    
+    const collection = await getDBCollection()
+
     const operations = {
 
-        countDocuments: async (...attr) => await getDBCollection().countDocuments(...attr),
-        findOne: async (...attr) => await getDBCollection().findOne(...attr).toArray(),
-        find: async (...attr) => await getDBCollection().find(...attr).toArray(),
-        deleteOne: async (...attr) => await getDBCollection().deleteOne(...attr),
-        deleteMany: async (...attr) => await getDBCollection().deleteMany(...attr),
-        insertOne: async (...attr) => await getDBCollection().insertOne(...attr),
-        insertMany: async (...attr) => await getDBCollection().insertMany(...attr),
-        remove: async (...attr) => await getDBCollection().remove(...attr),
-        renameCollection:  async (...attr) => await getDBCollection().renameCollection(...attr),
-        updateOne: async (...attr) => await getDBCollection().updateOne(...attr),
-        updateMany: async (...attr) => await getDBCollection().updateMany(...attr),
-        findOneAndDelete: async (...attr) => await getDBCollection().findOneAndDelete(...attr),
-        findOneAndReplace: async (...attr) => await getDBCollection().findOneAndReplace(...attr),
-        findOneAndUpdate: async (...attr) => await getDBCollection().findOneAndUpdate(...attr),
+        countDocuments: async (...attr) => collection.countDocuments(...attr),
+        findOne: async (...attr) => collection.findOne(...attr).toArray(),
+        find: async (...attr) => collection.find(...attr).toArray(),
+        deleteOne: async (...attr) => collection.deleteOne(...attr),
+        deleteMany: async (...attr) => collection.deleteMany(...attr),
+        insertOne: async (...attr) => collection.insertOne(...attr),
+        insertMany: async (...attr) => collection.insertMany(...attr),
+        remove: async (...attr) => collection.remove(...attr),
+        renameCollection:  async (...attr) => collection.renameCollection(...attr),
+        updateOne: async (...attr) => collection.updateOne(...attr),
+        updateMany: async (...attr) => collection.updateMany(...attr),
+        findOneAndDelete: async (...attr) => collection.findOneAndDelete(...attr),
+        findOneAndReplace: async (...attr) => collection.findOneAndReplace(...attr),
+        findOneAndUpdate: async (...attr) => collection.findOneAndUpdate(...attr),
 
     }
     return operations 
