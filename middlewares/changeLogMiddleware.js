@@ -1,5 +1,6 @@
 const { error } = require('console');
 const {generateDBOperation} = require('../DB/basicDBCollactionOperations');
+const { fromDBObjToArray } = require('../utils/generalUtils');
 
 
 
@@ -66,14 +67,18 @@ const changeLog = async (req,res,next) => {
             }
             const prevValueProjection = {
             [wantedField]: 1, 
+            _id:0
             }
 
-            // const prevValue = await generateDBOperation(
-            //     'findOne',
-            //     'TODOS',
-            //     WantedDocuQuery,
-            //     prevValueProjection
-            // )
+            const prevWantedValueObj = await generateDBOperation(
+                'findOne',
+                'TODOS',               
+                WantedDocuQuery,
+                prevValueProjection
+            )
+
+            console.log(prevWantedValueObj)
+            const prevValue = prevWantedValueObj[wantedField]
 
             const updateChangeLog = await generateDBOperation(
                 'insertOne',
@@ -84,8 +89,7 @@ const changeLog = async (req,res,next) => {
                     TODOID : _id,
                     changedField: wantedField,
                     values: {
-                    // prevValue : prevValue,
-                    prevValue : 'avi',
+                    prevValue : prevValue,
                     newValue : wantedFieldUpdateVal
                     },
                     timeStanp :changeTimeStamp
