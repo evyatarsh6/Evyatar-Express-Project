@@ -38,6 +38,10 @@ const basicDBCollactionOperations = async (collactionName) =>  {
     const getDBCollection = async () => await getWantedCollection(collactionName)
     const collection = await getDBCollection()
 
+    const findOneTest = collection.findOne({})
+    const avi = findOneTest.toArray()
+    console.log(avi)
+
     const operations = {
 
         countDocuments: async (...attr) => collection.countDocuments(...attr),

@@ -1,8 +1,6 @@
-const { getUnicDocumentFromCollec } = require('../actions/getActions');
-const { postWantedCollection } = require('../actions/postActions');
 const { error } = require('console');
 const {generateDBOperation} = require('../DB/basicDBCollactionOperations');
-const { putWantedCollection } = require('../actions/putActions');
+
 
 
 const changeLog = async (req,res,next) => {
@@ -68,13 +66,14 @@ const changeLog = async (req,res,next) => {
             }
             const prevValueProjection = {
             [wantedField]: 1, 
-            _id: 0
             }
 
-            // const prevValue = await getUnicDocumentFromCollec
-            // (
-            //     'TODOS', WantedDocuQuery, prevValueProjection
-            // )
+            const prevValue = await generateDBOperation(
+                'findOne',
+                'TODOS',
+                WantedDocuQuery,
+                prevValueProjection
+            )
 
             const updateChangeLog = await generateDBOperation(
                 'insertOne',
