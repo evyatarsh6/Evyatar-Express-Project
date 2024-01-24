@@ -1,5 +1,6 @@
 const  { Router} = require('express');
 const { getWantedDocumentsFromCollec } = require('../actions/getActions');
+const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
 
 const router = Router();
 
@@ -10,7 +11,7 @@ router.get("/:hoverID", async (req, res) => {
     }
     const projection = {}
 
-    const result = await generateOparation(
+    const result = await generateDBOparation(
       'find',
       'TODOS',
       query,
@@ -23,7 +24,7 @@ router.get("/:hoverID", async (req, res) => {
     // if (result) {
     //   res.send(result);
     // }
-    
+
 });
 
 

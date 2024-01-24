@@ -1,6 +1,5 @@
-const  { Router} = require('express')
-const { getWantedDocumentsFromCollec } = require('../actions/getActions');
-const { fromDBObjToArray } = require( '../utils/generalUtils');
+const  { Router} = require('express');
+const { generateDBOparation } = require('../DB/basicDBCollactionOparations');
 
 const router = Router();
 
@@ -8,7 +7,7 @@ router.get("/", async (req, res) => {
 const query = {}
   const projection = {}
 
-  const result = await generateOparation(
+  const result = await generateDBOparation(
     'find',
     'TODOS',
     query,
@@ -20,7 +19,7 @@ const query = {}
   // const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query, projection )
   // const finalResults = await fromDBObjToArray(resultsDBObj)
   // res.send(finalResults).status(200);
-  
+
 });
 
 

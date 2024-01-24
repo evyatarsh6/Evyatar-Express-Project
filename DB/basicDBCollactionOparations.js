@@ -21,7 +21,7 @@ const getWantedCollection = async (collectionName) => {
 
 
 
-const generateOparation = async (operationType, collectionName, ...attr) => {
+const generateDBOparation = async (operationType, collectionName, ...attr) => {
     try {
         const action =  await basicDBCollactionOparations(collectionName)[operationType](...attr)
         return action
@@ -69,4 +69,4 @@ const basicDBCollactionOparations = (collactionName) =>  {
 }
 
 
-module.exports = {basicDBCollactionOparations, generateOparation};
+module.exports = {basicDBCollactionOparations, generateDBOparation};

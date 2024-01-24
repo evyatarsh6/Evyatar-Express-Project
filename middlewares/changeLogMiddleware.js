@@ -1,7 +1,7 @@
 const { getUnicDocumentFromCollec } = require('../actions/getActions');
 const { postWantedCollection } = require('../actions/postActions');
 const { error } = require('console');
-const {generateOparation} = require('../DB/basicDBCollactionOparations');
+const {generateDBOparation} = require('../DB/basicDBCollactionOparations');
 const { putWantedCollection } = require('../actions/putActions');
 
 
@@ -15,7 +15,7 @@ const changeLog = async (req,res,next) => {
         
         if (req.method === 'POST') {
             const { _id, kind } = req.body || {};
-            const updateChangeLog = await generateOparation(
+            const updateChangeLog = await generateDBOparation(
                 'insertOne',
                 'changeLog',
                 {
@@ -39,7 +39,7 @@ const changeLog = async (req,res,next) => {
 
             const {_id} =  req.body || {}
 
-            const updateChangeLog = await generateOparation(
+            const updateChangeLog = await generateDBOparation(
                 'insertOne',
                 'changeLog',
                 {
@@ -76,7 +76,7 @@ const changeLog = async (req,res,next) => {
             //     'TODOS', WantedDocuQuery, prevValueProjection
             // )
 
-            const updateChangeLog = await generateOparation(
+            const updateChangeLog = await generateDBOparation(
                 'insertOne',
                 'changeLog',
                 {
