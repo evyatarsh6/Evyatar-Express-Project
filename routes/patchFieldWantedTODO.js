@@ -18,8 +18,8 @@ router.patch("/", async (req, res) => {
     const result = await generateOparation(
         'updateOne',
         'TODOS',
-        [WantedDocuQuery],
-        [data]
+        WantedDocuQuery,
+        data
       )
 
     if (result) {
