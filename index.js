@@ -14,7 +14,7 @@ const putWantedTODO = require('./routes/putWantedTODO')
 // const patchFieldAllTODOS = require('./routes/patchFieldAllTODOS')
 // const { postWantedCollection } = require('../Evyatar-Express-Project/actions/postActions');
 // const { error } = require('console');
-// const deleteAllTODOS = require('./routes/deleteAllTODOS')
+const deleteAllDocuWantedCollection = require('./routes/deleteAllDocuWantedCollection')
 
 
 const app = express();
@@ -34,8 +34,8 @@ app.use('/putWantedTODO', putWantedTODO )
 app.use('/getShownTODOS', getVisibleTODOS)
 app.use('/getAllTODOS', getAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
+app.use('/deleteAllDocuWantedCollection', deleteAllDocuWantedCollection)
 // app.use('/patchFieldAllTODOS', patchFieldAllTODOS)
-// app.use('/deleteAllTODOS', deleteAllTODOS)
 
 
 
