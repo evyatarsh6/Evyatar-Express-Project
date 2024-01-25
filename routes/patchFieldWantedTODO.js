@@ -17,16 +17,15 @@ router.patch("/", async (req, res) => {
     const operation = { $set: {[data.wantedField]: data.wantedFieldUpdateVal}}
 
     // const result = await patchWantedCollection('TODOS', WantedDocuQuery, data )
-    const result = await generateDBOperation(
+    await generateDBOperation(
         'updateOne',
         'TODOS',
         WantedDocuQuery,
         operation
-      )
-
-    if (result) {
-      res.send('update successful');
-    }
+    )
+    // if (result) {
+    //   res.send('update successful');
+    // }
 });
 
 

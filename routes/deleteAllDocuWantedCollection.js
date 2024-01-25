@@ -11,18 +11,18 @@ router.use(bodyParser.urlencoded({ extended: true }));
 router.delete("/:collectionName", async (req,res,next) => {
     const collectionName = req.params.collectionName
 
-    const result = await generateDBOperation(
+    await generateDBOperation(
         'deleteMany',
         collectionName,
         {}
       )
       
-      if (result) {
-        res.send('update successful');
-      }
-      else{
-        console.error('an error has ocured') 
-      }
+    //   if (result) {
+    //     res.send('update successful');
+    //   }
+    //   else{
+    //     console.error('an error has ocured') 
+    //   }
     });
 
 module.exports = router;

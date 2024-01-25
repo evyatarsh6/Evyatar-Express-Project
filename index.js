@@ -34,7 +34,7 @@ app.use('/putWantedTODO', putWantedTODO )
 app.use('/getShownTODOS', getVisibleTODOS)
 app.use('/getAllTODOS', getAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
-// app.use('/deleteAllDocuWantedCollection', deleteAllDocuWantedCollection)
+app.use('/deleteAllDocuWantedCollection', deleteAllDocuWantedCollection)
 // app.use('/patchFieldAllTODOS', patchFieldAllTODOS)
 
 

@@ -26,7 +26,7 @@ const changeLog = async (req,res,next) => {
                 }
             )
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')
@@ -50,7 +50,7 @@ const changeLog = async (req,res,next) => {
             )
 
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')
@@ -77,7 +77,6 @@ const changeLog = async (req,res,next) => {
                 prevValueProjection
             )
 
-            console.log(prevWantedValueObj)
             const prevValue = prevWantedValueObj[wantedField]
 
             const updateChangeLog = await generateDBOperation(
@@ -97,7 +96,7 @@ const changeLog = async (req,res,next) => {
             )
 
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')

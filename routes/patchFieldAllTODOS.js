@@ -27,9 +27,9 @@ router.patch("/", async (req, res) => {
       operation
     )
 
-    if (result) {
-      res.send('update successful');
-    }
+    // if (result) {
+    //   res.send('update successful');
+    // }
 });
 
 
