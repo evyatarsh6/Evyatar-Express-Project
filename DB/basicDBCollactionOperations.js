@@ -50,10 +50,7 @@ const basicDBCollactionOperations = async (collactionName) =>  {
             const [queryObj, projectionObj] = [ ...attr ]
 
             const DBObj = collection.findOne(queryObj,{projection:projectionObj})
-            // const DBObj = collection.findOne(attr[0], {projection:(attr)[1]})
             return DBObj
-            // const resultArr = await fromDBObjToArray(DBObj)
-            // return resultArr
         },
         find: async (...attr) => {
             const DBObj = collection.find(...attr)

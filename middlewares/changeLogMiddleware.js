@@ -5,7 +5,8 @@ const { fromDBObjToArray } = require('../utils/generalUtils');
 
 
 const changeLog = async (req,res,next) => {
-    const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
+    const allowedMethods = ['PATCH', 'POST', 'DELETE'];
+    // const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
 
     const changeTimeStamp = new Date()
     const changeLogID = Date.now()
