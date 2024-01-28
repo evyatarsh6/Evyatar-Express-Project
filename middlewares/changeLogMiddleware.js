@@ -1,11 +1,12 @@
-const { getUnicDocumentFromCollec } = require('../actions/getActions');
-const { postWantedCollection } = require('../actions/postActions');
 const { error } = require('console');
-const basicDBCollactionOparations = require('../DB/basicDBCollactionOparations');
+const {generateDBOperation} = require('../DB/basicDBCollactionOperations');
+const { fromDBObjToArray } = require('../utils/generalUtils');
+
 
 
 const changeLog = async (req,res,next) => {
-    const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
+    const allowedMethods = ['PATCH', 'POST', 'DELETE'];
+
     const changeTimeStamp = new Date()
     const changeLogID = Date.now()
 
@@ -13,20 +14,19 @@ const changeLog = async (req,res,next) => {
         
         if (req.method === 'POST') {
             const { _id, kind } = req.body || {};
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
+            const updateChangeLog = await generateDBOperation(
+                'insertOne',
+                'changeLog',
+                {
                 _id :changeLogID,
                 changeType : 'POST',
                 TODOID : _id,
                 TODOKind:  kind,
-                timeStanp :changeTimeStamp
-                
-            }
+                timeStanp :`${changeTimeStamp}`
+                }
             )
-
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')
@@ -37,19 +37,20 @@ const changeLog = async (req,res,next) => {
         else if (req.method === 'PUT') {
 
             const {_id} =  req.body || {}
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
-                _id :changeLogID,
-                changeType : 'PUT',
-                TODOID : _id,
-                timeStanp :changeTimeStamp
-                
-            }
+
+            const updateChangeLog = await generateDBOperation(
+                'insertOne',
+                'changeLog',
+                {
+                    _id :changeLogID,
+                    changeType : 'PUT',
+                    TODOID : _id,
+                    timeStanp :`${changeTimeStamp}`
+                }
             )
 
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')
@@ -66,31 +67,36 @@ const changeLog = async (req,res,next) => {
             }
             const prevValueProjection = {
             [wantedField]: 1, 
-            _id: 0
+            _id:0
             }
 
-            const prevValue = await getUnicDocumentFromCollec
-            (
-                'TODOS', WantedDocuQuery, prevValueProjection
+            const prevWantedValueObj = await generateDBOperation(
+                'findOne',
+                'TODOS',               
+                WantedDocuQuery,
+                prevValueProjection
             )
 
-            const updateChangeLog = await postWantedCollection(
-            'changeLog',
-            {
-                _id :changeLogID,
-                changeType : 'PATCH',
-                TODOID : _id,
-                changedField: wantedField,
-                values: {
-                prevValue : prevValue,
-                newValue : wantedFieldUpdateVal
-                },
-                timeStanp :changeTimeStamp
-                
-            })
+            const prevValue = prevWantedValueObj[wantedField]
+
+            const updateChangeLog = await generateDBOperation(
+                'insertOne',
+                'changeLog',
+                {
+                    _id :changeLogID,
+                    changeType : 'PATCH',
+                    TODOID : _id,
+                    changedField: wantedField,
+                    values: {
+                    prevValue : prevValue,
+                    newValue : wantedFieldUpdateVal
+                    },
+                    timeStanp :`${changeTimeStamp}`
+                }
+            )
 
             if (updateChangeLog) {
-            console.log('update changeLog succeed')
+            res.send('update changeLog succeed')
             }
             else{
             console.error('update changeLog faild')

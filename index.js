@@ -5,16 +5,16 @@ const changLogMiddleware = require('./middlewares/changeLogMiddleware')
 
 const getVisibleTODOS = require('./routes/getvisibleTODOS');
 const getTODOByHoverID = require('./routes/getTODOByHoverID')
+const getCurrDeltas = require('./routes/getCurrDeltas')
 const getAllTODOS = require('./routes/getAllTODOS')
-const getDeltas = require('./routes/getDeltas')
 const postTODO = require('./routes/postTODO');
 const patchFieldWantedTODO = require('./routes/patchFieldWantedTODO')
 const putWantedTODO = require('./routes/putWantedTODO')
+const deleteAllDocuWantedCollection = require('./routes/deleteAllDocuWantedCollection')
 
+// const getDeltas = require('./routes/getDeltas')
 // const patchFieldAllTODOS = require('./routes/patchFieldAllTODOS')
 // const { postWantedCollection } = require('../Evyatar-Express-Project/actions/postActions');
-// const { error } = require('console');
-// const deleteAllTODOS = require('./routes/deleteAllTODOS')
 
 
 const app = express();
@@ -29,13 +29,14 @@ app.use(async (req, res, next) => await changLogMiddleware(req, res, next));
 
 
 app.use('/postTODO', postTODO)
+app.use('/getCurrDeltas', getCurrDeltas )
 app.use('/patchFieldWantedTODO', patchFieldWantedTODO)
 app.use('/putWantedTODO', putWantedTODO )
 app.use('/getShownTODOS', getVisibleTODOS)
 app.use('/getAllTODOS', getAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
+app.use('/deleteAllDocuWantedCollection', deleteAllDocuWantedCollection)
 // app.use('/patchFieldAllTODOS', patchFieldAllTODOS)
-// app.use('/deleteAllTODOS', deleteAllTODOS)
 
 
 
