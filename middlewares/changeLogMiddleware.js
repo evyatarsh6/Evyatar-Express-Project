@@ -6,7 +6,6 @@ const { fromDBObjToArray } = require('../utils/generalUtils');
 
 const changeLog = async (req,res,next) => {
     const allowedMethods = ['PATCH', 'POST', 'DELETE'];
-    // const allowedMethods = ['PATCH', 'PUT', 'POST', 'DELETE'];
 
     const changeTimeStamp = new Date()
     const changeLogID = Date.now()
@@ -23,7 +22,7 @@ const changeLog = async (req,res,next) => {
                 changeType : 'POST',
                 TODOID : _id,
                 TODOKind:  kind,
-                timeStanp :changeTimeStamp
+                timeStanp :`${changeTimeStamp}`
                 }
             )
             if (updateChangeLog) {
@@ -46,7 +45,7 @@ const changeLog = async (req,res,next) => {
                     _id :changeLogID,
                     changeType : 'PUT',
                     TODOID : _id,
-                    timeStanp :changeTimeStamp
+                    timeStanp :`${changeTimeStamp}`
                 }
             )
 
@@ -92,7 +91,7 @@ const changeLog = async (req,res,next) => {
                     prevValue : prevValue,
                     newValue : wantedFieldUpdateVal
                     },
-                    timeStanp :changeTimeStamp
+                    timeStanp :`${changeTimeStamp}`
                 }
             )
 

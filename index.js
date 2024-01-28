@@ -15,7 +15,6 @@ const deleteAllDocuWantedCollection = require('./routes/deleteAllDocuWantedColle
 // const getDeltas = require('./routes/getDeltas')
 // const patchFieldAllTODOS = require('./routes/patchFieldAllTODOS')
 // const { postWantedCollection } = require('../Evyatar-Express-Project/actions/postActions');
-// const { error } = require('console');
 
 
 const app = express();

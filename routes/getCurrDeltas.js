@@ -15,19 +15,21 @@ router.get("/:currTime", async (req, res) => {
     let newTime = req.params.currTime
     
     const query = {
-        $and: [
-          { "timeStanp": { $lt: newTime } },
-          { "timeStanp": { $gt: prevTime } }
-        ]
-      }
-      
+      "timeStanp": { $lt: newTime },
+      $and:
+      [{ "timeStanp": { $gt: prevTime } }]
+    }
+
 
     const avi = await generateDBOperation(
         'find',
         'changeLog',
-        {},
         query,
       )
+
+    prevTime = newTime
+
+
       if (avi) {
           res.send(avi)
       }
