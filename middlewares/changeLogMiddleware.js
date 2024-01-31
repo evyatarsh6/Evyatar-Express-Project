@@ -13,15 +13,15 @@ const changeLog = async (req,res,next) => {
     if (allowedMethods.includes(req.method)) {
         
         if (req.method === 'POST') {
-            const { _id, kind } = req.body || {};
+            const TODO = req.body || {};
             const updateChangeLog = await generateDBOperation(
                 'insertOne',
                 'changeLog',
                 {
                 _id :changeLogID,
                 changeType : 'POST',
-                TODOID : _id,
-                TODOKind:  kind,
+                TODOID : TODO._id,
+                TODOInfo: TODO,
                 timeStanp :`${changeTimeStamp}`
                 }
             )
