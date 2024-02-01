@@ -15,13 +15,6 @@ router.delete("/:collectionName", async (req,res,next) => {
         collectionName,
         {}
       )
-      
-    //   if (result) {
-    //     res.send('update successful');
-    //   }
-    //   else{
-    //     console.error('an error has ocured') 
-    //   }
     });
 
 module.exports = router;

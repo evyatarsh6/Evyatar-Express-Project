@@ -10,8 +10,6 @@ router.put("/", async (req, res) => {
         "_id": _id
       } 
 
-      // const result = await putWantedCollection('TODOS', WantedDocuQuery, req.body )
-
 
     await generateDBOperation(
       'findOneAndReplace',
@@ -19,10 +17,6 @@ router.put("/", async (req, res) => {
       WantedDocuQuery,
       req.body
     )
-
-    // if (result) {
-    //   res.send('update successful');
-    // }
 });
 
 

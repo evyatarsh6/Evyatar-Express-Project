@@ -1,5 +1,3 @@
-const { ObjectId } = require("mongodb")
-
 const generateFilterKindQuery = (filterKind) => {
     switch (filterKind) {
         case 'normal':

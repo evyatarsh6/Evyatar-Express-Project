@@ -20,10 +20,6 @@ router.get("/:filterKind", async (req, res) => {
 
   res.send(result).status(200);
 
-  // const resultsDBObj = await getWantedDocumentsFromCollec('TODOS',query, projection )
-  // const finalResults = await fromDBObjToArray(resultsDBObj)
-  // res.send(finalResults).status(200);
-
 });
 
 

@@ -20,11 +20,6 @@ router.get("/:hoverID", async (req, res) => {
   
     res.send(result).status(200);
 
-    // const result = await getWantedDocumentsFromCollec('TODOS', WantedDocuQuery, wantedProjection)
-    // if (result) {
-    //   res.send(result);
-    // }
-
 });
 
 

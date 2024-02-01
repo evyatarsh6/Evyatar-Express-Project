@@ -19,17 +19,13 @@ router.patch("/", async (req, res) => {
 
     const WantedDocuQuery = {}
 
-    // const result = await patchWantedCollection('TODOS', WantedDocuQuery, data, true)
     const result = await generateDBOperation(
       'updateMany',
       'TODOS',
       WantedDocuQuery,
       operation
     )
-
-    // if (result) {
-    //   res.send('update successful');
-    // }
+    
 });
 
 
