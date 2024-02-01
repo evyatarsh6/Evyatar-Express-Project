@@ -3,7 +3,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const changLogMiddleware = require('./middlewares/changeLogMiddleware')
 
-const getVisibleTODOS = require('./routes/getvisibleTODOS');
+// const getVisibleTODOS = require('./routes/getvisibleTODOS');
 const getTODOByHoverID = require('./routes/getTODOByHoverID')
 const getCurrDeltas = require('./routes/getCurrDeltas')
 const getAllTODOS = require('./routes/getAllTODOS')
@@ -28,7 +28,7 @@ app.use('/postTODO', postTODO)
 app.use('/getCurrDeltas', getCurrDeltas )
 app.use('/patchFieldWantedTODO', patchFieldWantedTODO)
 app.use('/putWantedTODO', putWantedTODO )
-app.use('/getShownTODOS', getVisibleTODOS)
+// app.use('/getShownTODOS', getVisibleTODOS)
 app.use('/getAllTODOS', getAllTODOS)
 app.use('/getTODOByHoverID', getTODOByHoverID)
 // app.use('/deleteAllDocuWantedCollection', deleteAllDocuWantedCollection)
