@@ -1,21 +1,21 @@
-const  { Router} = require('express')
+const { Router } = require('express')
 const bodyParser = require('body-parser');
-const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
+const { collectionNameReqestSchema } = require('../schemas/deleteAllDocuWantedCollection');
+const { deleteAllDocuWantedCollectionHandler } = require('../handlers/deleteAllDocuWantedCollectionHandler');
 
 const router = Router();
 
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
-router.delete("/:collectionName", async (req,res,next) => {
-    const collectionName = req.params.collectionName
+const validateMiddleware = () => async (req, res, next) => {
+  if (collectionNameReqestSchema.parseAsync(req)) {
+    return res.status(400).send(error.message);
+  }
+  next();
+}
 
-    await generateDBOperation(
-        'deleteMany',
-        collectionName,
-        {}
-      )
-      
-    });
+router.delete('/:collectionName', validateMiddleware, deleteAllDocuWantedCollectionHandler)
+
 
 module.exports = router;

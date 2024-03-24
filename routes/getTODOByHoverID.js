@@ -1,13 +1,12 @@
 const { Router } = require('express');
 
 const { getTodoByIdHandler } = require('../handlers/getTODOByHoverIDHandler');
-const { TODOIDSchema } = require('../schemas/TODOID');
-
+const { TODOIDReqestSchema } = require('../schemas/TODOID');
 const router = Router();
 
 const validateMiddleware = () => async (req, res, next) => {
-  if (TODOIDSchema.parseAsync(req.params.hoverID)) {
-    return res.status(400).send('Validation failed');
+  if (TODOIDReqestSchema.parseAsync(req)) {
+    return res.status(400).send(error.message);
   }
   next();
 }

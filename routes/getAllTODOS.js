@@ -1,22 +1,16 @@
 const  { Router} = require('express');
-const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
+const { getAllTODOSHandler } = require('../handlers/getAllTODOSHandler');
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-const query = {}
-  const projection = {}
+const validateMiddleware = () => async (req, res, next) => {
+  if (TODOIDReqestSchema.parseAsync(req)) {
+    return res.status(400).send(error.message);
+  }
+  next();
+}
 
-  const result = await generateDBOperation(
-    'find',
-    'TODOS',
-    query,
-    projection
-  )
-
-  res.send(result).status(200);
-
-});
+router.get('/:todoId', validateMiddleware, getAllTODOSHandler)
 
 
 module.exports = router;
