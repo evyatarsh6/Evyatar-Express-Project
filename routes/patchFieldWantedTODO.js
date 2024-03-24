@@ -1,30 +1,19 @@
-const  { Router} = require('express')
-const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
+const { Router } = require('express')
+const { patchDocumentField } = require('../schemas/patchDocumentField.js');
+const { patchFieldWantedTODOHandler } = require('../handlers/patchFieldWantedTODOHandler.js');
 
 const router = Router();
 
-router.patch("/", async (req, res) => {
-    const {_id, wantedField, wantedFieldUpdateVal} =  req.body
-    
-    const data = {
-        'wantedField': wantedField,
-        'wantedFieldUpdateVal': wantedFieldUpdateVal
+const validateMiddleware = () => async (req, res, next) => {
+    try {
+        await patchDocumentField.parseAsync(req)
+        return next()
+    } catch (error) {
+        return res.status(400).send(error.message)
     }
-    const WantedDocuQuery =  {
-        "_id": _id
-    } 
+}
 
-    const operation = { $set: {[data.wantedField]: data.wantedFieldUpdateVal}}
-
-    await generateDBOperation(
-        'updateOne',
-        'TODOS',
-        WantedDocuQuery,
-        operation
-    )
-    
-});
-
+router.patch('/', validateMiddleware, patchFieldWantedTODOHandler)
 
 module.exports = router;
 

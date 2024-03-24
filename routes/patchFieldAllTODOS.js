@@ -1,12 +1,12 @@
 const { Router } = require('express');
 const { patchFieldAllTODOSHandler } = require('../handlers/patchFieldAlllTODOSHandler.js');
-const { patchFieldAllDocuCollection } = require('../schemas/patchFieldAllTODOS.js');
+const { patchDocumentField } = require('../schemas/patchDocumentField.js');
 
 const router = Router();
 
 const validateMiddleware = () => async (req, res, next) => {
   try {
-    await patchFieldAllDocuCollection.parseAsync(req)
+    await patchDocumentField.parseAsync(req)
     return next()
   } catch (error) {
     return res.status(400).send(error.message)
