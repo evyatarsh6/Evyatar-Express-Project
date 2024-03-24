@@ -5,10 +5,12 @@ const { patchFieldAllDocuCollection } = require('../schemas/patchFieldAllTODOS.j
 const router = Router();
 
 const validateMiddleware = () => async (req, res, next) => {
-  if (patchFieldAllDocuCollection.parseAsync(req)) {
-    return res.status(400).send(error.message);
+  try {
+    await patchFieldAllDocuCollection.parseAsync(req)
+    return next()
+  } catch (error) {
+    return res.status(400).send(error.message)
   }
-  next();
 }
 
 router.patch('/', validateMiddleware, patchFieldAllTODOSHandler)
