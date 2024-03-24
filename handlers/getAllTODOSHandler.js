@@ -16,7 +16,7 @@ export const getAllTODOSHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'not found wanted TODO')
+            return createError(404, 'TODOS not found')
         }
         res.send(result).status(200);
 

@@ -12,7 +12,7 @@ export const deleteAllDocuWantedCollectionHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'not found wanted collection')
+            return createError(404, 'wanted collection not found')
         }
         res.send(result).status(200);
 

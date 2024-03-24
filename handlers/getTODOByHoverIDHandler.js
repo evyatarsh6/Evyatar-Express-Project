@@ -18,7 +18,7 @@ export const getTodoByIdHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'not found wanted TODO')
+            return createError(404, 'wanted TODO not found')
         }
         res.send(result).status(200);
         

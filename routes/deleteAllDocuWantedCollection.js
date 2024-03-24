@@ -1,6 +1,6 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser');
-const { collectionNameReqestSchema } = require('../schemas/deleteAllDocuWantedCollection');
+const { collectionNameReqestSchema } = require('../schemas/wantedCollection');
 const { deleteAllDocuWantedCollectionHandler } = require('../handlers/deleteAllDocuWantedCollectionHandler');
 
 const router = Router();
