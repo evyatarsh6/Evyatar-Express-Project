@@ -1,24 +1,24 @@
-const  { Router} = require('express');
-const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
+// const  { Router} = require('express');
+// const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
-const router = Router();
+// const router = Router();
 
-router.put("/", async (req, res) => {
-    const {_id} =  req.body
+// router.put("/", async (req, res) => {
+//     const {_id} =  req.body
     
-    const WantedDocuQuery =  {
-        "_id": _id
-      } 
+//     const WantedDocuQuery =  {
+//         "_id": _id
+//       } 
 
 
-    await generateDBOperation(
-      'findOneAndReplace',
-      'TODOS',
-      WantedDocuQuery,
-      req.body
-    )
-});
+//     await generateDBOperation(
+//       'findOneAndReplace',
+//       'TODOS',
+//       WantedDocuQuery,
+//       req.body
+//     )
+// });
 
 
-module.exports = router;
+// module.exports = router;
 

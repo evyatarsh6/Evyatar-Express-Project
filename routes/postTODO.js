@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const bodyParser = require('body-parser');
 const { postTODOHandler } = require('../handlers/postTODOHandler');
-const { postTODO } = require('../schemas/postTOD0.js');
+const { postTODOSchema } = require('../schemas/postTODO.js');
 
 const router = Router();
 
@@ -10,7 +10,7 @@ router.use(bodyParser.urlencoded({ extended: true }));
 
 const validateMiddleware = () => async (req, res, next) => {
   try {
-    await postTODO.parseAsync(req)
+    await postTODOSchema.pick({body : true}).parseAsync(req)
     return next()
   } catch (error) {
     return res.status(400).send(error.message)

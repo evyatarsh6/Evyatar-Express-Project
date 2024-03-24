@@ -7,7 +7,7 @@ const router = Router();
 
 const validateMiddleware = () => async (req, res, next) => {
   try {
-    await TODOIDReqestSchema.parseAsync(req)
+    await TODOIDReqestSchema.pick({params : true}).parseAsync(req)
     return next()
   } catch (error) {
     return res.status(400).send(error.message) 
