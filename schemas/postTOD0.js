@@ -1,4 +1,4 @@
-// import { z } from "zod";
+const { z, any } = require("zod");
 
 // export const postTODO = z.object({
 //     body: {
@@ -25,9 +25,8 @@
 //         }),
 //     }
 // })
-import { z } from "zod";
 
-export const postTODO = z.object({
+exports.postTODO = z.object({
     body: z.record(
         _id = z.string({
             required_error: "valid TODOID value is required",
@@ -47,6 +46,7 @@ export const postTODO = z.object({
         location = z.array({
             required_error: "valid location value is required",
         }),
+        // location = any,
         isPinBtnDisable = z.boolean({
             required_error: "valid isPinBtnDisable value is required",
         }),

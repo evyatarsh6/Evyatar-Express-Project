@@ -1,4 +1,4 @@
-export const postTODOHandler = async (req, res) => {
+const postTODOHandler = async (req, res) => {
     try {
         const result = await generateDBOperation(
             'insertOne',
@@ -7,7 +7,7 @@ export const postTODOHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'post new TODO failed')
+            return createError(405, 'post new TODO failed')
         }
         res.send(result).status(200);
 
@@ -16,3 +16,6 @@ export const postTODOHandler = async (req, res) => {
     }
 
 }
+
+
+module.exports = { postTODOHandler };

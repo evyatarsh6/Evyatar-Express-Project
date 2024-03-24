@@ -1,4 +1,4 @@
-export const patchFieldWantedTODOHandler = async (req, res) => {
+const patchFieldWantedTODOHandler = async (req, res) => {
     try {
         const { _id, wantedField, wantedFieldUpdateVal } = req.body
 
@@ -15,7 +15,7 @@ export const patchFieldWantedTODOHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, `update wanted TODO with ID: ${_id} failed`)
+            return createError(405, `update wanted TODO with ID: ${_id} failed`)
         }
         res.send(result).status(200);
 
@@ -24,3 +24,5 @@ export const patchFieldWantedTODOHandler = async (req, res) => {
     }
 
 }
+
+module.exports = { patchFieldWantedTODOHandler };

@@ -1,7 +1,9 @@
-import { z } from "zod";
+const { z } = require("zod");
 
-export const TODOIDReqestSchema = z.object({
-    params: z.string({
-        required_error: "valid TODOID is required",
-    })
-})
+exports.TODOIDReqestSchema = z.object({
+    params: z.object({
+        TODOID: z.string({
+            required_error: "valid TODOID is required",
+        }),
+    }),
+});

@@ -1,4 +1,4 @@
-const  { Router} = require('express');
+const { Router } = require('express');
 const { getAllTODOSHandler } = require('../handlers/getAllTODOSHandler');
 const { collectionNameReqestSchema } = require('../schemas/wantedCollection');
 
@@ -9,11 +9,12 @@ const validateMiddleware = () => async (req, res, next) => {
     await collectionNameReqestSchema.parseAsync(req)
     return next()
   } catch (error) {
-    return res.status(400).send(error.message) 
+    return res.status(400).send(error.message)
   }
 }
 
 router.get('/:todoId', validateMiddleware, getAllTODOSHandler)
+// router.get('/', getAllTODOSHandler)
 
 
 module.exports = router;

@@ -2,7 +2,7 @@
 const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 var createError = require('http-errors')
 
-export const getAllTODOSHandler = async (req, res) => {
+const getAllTODOSHandler = async (req, res) => {
 
     try {
         const query = {}
@@ -16,7 +16,7 @@ export const getAllTODOSHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'TODOS not found')
+            return createError(405, 'TODOS not found')
         }
         res.send(result).status(200);
 
@@ -26,3 +26,6 @@ export const getAllTODOSHandler = async (req, res) => {
     }
 
 }
+
+
+module.exports = { getAllTODOSHandler };

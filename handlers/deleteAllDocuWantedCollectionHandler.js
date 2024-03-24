@@ -1,7 +1,7 @@
 
 const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 
-export const deleteAllDocuWantedCollectionHandler = async (req, res) => {
+const deleteAllDocuWantedCollectionHandler = async (req, res) => {
     try {
         const collectionName = req.params.collectionName
 
@@ -12,7 +12,7 @@ export const deleteAllDocuWantedCollectionHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'wanted collection not found')
+            return createError(405, 'wanted collection not found')
         }
         res.send(result).status(200);
 
@@ -20,3 +20,5 @@ export const deleteAllDocuWantedCollectionHandler = async (req, res) => {
         return createError(500, error.message)
     }
 }
+
+module.exports = { deleteAllDocuWantedCollectionHandler };

@@ -2,7 +2,7 @@ const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
 var createError = require('http-errors')
 
 
-export const getTodoByIDHandler = async (req, res) => {
+const getTodoByIDHandler = async (req, res) => {
     try {
         const hoverID = req.params.hoverID
         const query = {
@@ -18,7 +18,7 @@ export const getTodoByIDHandler = async (req, res) => {
         )
 
         if (!result) {
-            return createError(404, 'wanted TODO not found')
+            return createError(405, 'wanted TODO not found')
         }
         res.send(result).status(200);
 
@@ -29,3 +29,6 @@ export const getTodoByIDHandler = async (req, res) => {
 
 
 }
+
+
+module.exports = { getTodoByIDHandler };
