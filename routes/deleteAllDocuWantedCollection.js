@@ -15,6 +15,7 @@ router.delete("/:collectionName", async (req,res,next) => {
         collectionName,
         {}
       )
+      
     });
 
 module.exports = router;

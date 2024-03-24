@@ -1,25 +1,17 @@
-const  { Router} = require('express');
-const { generateDBOperation } = require('../DB/basicDBCollactionOperations');
+const { Router } = require('express');
+
+const { getTodoByIdHandler } = require('../handlers/getTODOByHoverIDHandler');
 
 const router = Router();
 
-router.get("/:hoverID", async (req, res) => {
-    const hoverID = req.params.hoverID
-    const query = {
-        _id: hoverID
-    }
-    const projection = {}
+const validateMiddleware = async (req, res, next) => {
+  if (!req.params.hoverID) {
+    return res.status(400).send('Validation failed');
+  }
+  next();
+}
 
-    const result = await generateDBOperation(
-      'find',
-      'TODOS',
-      query,
-      projection
-    )
-  
-    res.send(result).status(200);
-
-});
+router.get('/:todoId', validateMiddleware, getTodoByIdHandler)
 
 
 module.exports = router;
