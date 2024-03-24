@@ -4,16 +4,17 @@ const { patchFieldWantedTODOHandler } = require('../handlers/patchFieldWantedTOD
 
 const router = Router();
 
-const validateMiddleware = () => async (req, res, next) => {
-    try {
-        await patchDocumentFieldSchema.pick({body : true}).parseAsync(req)
-        return next()
-    } catch (error) {
-        return res.status(400).send(error.message)
-    }
-}
+// const validateMiddleware = () => async (req, res, next) => {
+//     try {
+//         await patchDocumentFieldSchema.pick({body : true}).parseAsync(req)
+//         return next()
+//     } catch (error) {
+//         return res.status(400).send(error.message)
+//     }
+// }
 
-router.patch('/', validateMiddleware, patchFieldWantedTODOHandler)
+// router.patch('/', validateMiddleware, patchFieldWantedTODOHandler)
+router.patch('/', patchFieldWantedTODOHandler)
 
 module.exports = router;
 
