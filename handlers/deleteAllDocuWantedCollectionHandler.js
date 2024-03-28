@@ -10,7 +10,7 @@ const deleteAllDocuWantedCollectionHandler = async (req, res) => {
             collectionName,
             {}
         )
-
+        console.log(result)
         if (!result) {
             return createError(405, 'wanted collection not found')
         }

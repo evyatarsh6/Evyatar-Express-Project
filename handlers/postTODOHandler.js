@@ -9,6 +9,7 @@ const postTODOHandler = async (req, res) => {
             req.body
         )
 
+        console.log(result)
         if (!result) {
             return createError(405, 'post new TODO failed')
         }

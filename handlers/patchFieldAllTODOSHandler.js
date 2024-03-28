@@ -13,6 +13,8 @@ const patchFieldAllTODOSHandler = async (req, res) => {
             WantedDocuQuery,
             operation
         )
+        console.log(result)
+        
         if (!result) {
             return createError(405, 'update TODOS field failed')
         }

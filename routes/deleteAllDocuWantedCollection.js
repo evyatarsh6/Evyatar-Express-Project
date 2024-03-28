@@ -8,17 +8,17 @@ const router = Router();
 router.use(bodyParser.json())
 router.use(bodyParser.urlencoded({ extended: true }));
 
-// const validateMiddleware = () => async (req, res, next) => {
-//   try {
-//     await collectionNameReqestSchema.pick({params : true}).parseAsync(req)
-//     return next()
-//   } catch (error) {
-//     return res.status(400).send(error.message)
-//   }
-// }
+const validateMiddleware = () => async (req, res, next) => {
+    try {
+        await collectionNameReqestSchema.parseAsync(req)
+        return next()
+    } catch (error) {
+        return res.status(400).send(error.message)
+    }
+}
 
-// router.delete('/:collectionName', validateMiddleware, deleteAllDocuWantedCollectionHandler)
-router.delete('/:collectionName', deleteAllDocuWantedCollectionHandler)
+router.delete('/:collectionName', validateMiddleware(), deleteAllDocuWantedCollectionHandler)
+// router.delete('/:collectionName', deleteAllDocuWantedCollectionHandler)
 
 
 module.exports = router;

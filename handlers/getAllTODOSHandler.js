@@ -15,6 +15,7 @@ const getAllTODOSHandler = async (req, res) => {
             projection
         )
 
+        // console.log(result)
         if (!result) {
             return createError(405, 'TODOS not found')
         }

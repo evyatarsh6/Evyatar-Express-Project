@@ -5,7 +5,7 @@ exports.patchDocumentFieldSchema = z.object({
         z.string({
             required_error: "valid document name is required",
         }),
-        any)
+        z.any())
 })
 
 

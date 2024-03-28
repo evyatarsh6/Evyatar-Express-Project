@@ -6,4 +6,9 @@ exports.TODOIDReqestSchema = z.object({
             required_error: "valid TODOID is required",
         }),
     }),
+    // params: z.record({
+    //     TODOID: z.string({
+    //         required_error: "valid TODOID is required",
+    //     }),
+    // }),
 });

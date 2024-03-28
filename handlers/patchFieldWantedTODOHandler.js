@@ -18,6 +18,7 @@ const patchFieldWantedTODOHandler = async (req, res) => {
             operation
         )
 
+        console.log(result)
         if (!result) {
             return createError(405, `update wanted TODO with ID: ${_id} failed`)
         }

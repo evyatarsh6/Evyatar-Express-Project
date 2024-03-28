@@ -17,6 +17,8 @@ const getTodoByIDHandler = async (req, res) => {
             projection
         )
 
+        console.log(result)
+        
         if (!result) {
             return createError(405, 'wanted TODO not found')
         }
