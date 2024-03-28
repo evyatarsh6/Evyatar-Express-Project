@@ -14,7 +14,6 @@ const validateMiddleware = () => async (req, res, next) => {
 }
 
 router.patch('/', validateMiddleware(), patchFieldWantedTODOHandler)
-// router.patch('/', patchFieldWantedTODOHandler)
 
 module.exports = router;
 

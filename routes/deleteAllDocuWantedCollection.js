@@ -18,7 +18,6 @@ const validateMiddleware = () => async (req, res, next) => {
 }
 
 router.delete('/:collectionName', validateMiddleware(), deleteAllDocuWantedCollectionHandler)
-// router.delete('/:collectionName', deleteAllDocuWantedCollectionHandler)
 
 
 module.exports = router;

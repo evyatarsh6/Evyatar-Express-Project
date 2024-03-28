@@ -1,8 +1,8 @@
 const { z } = require("zod");
 
 exports.postTODOSchema = z.object({
-    body: z.record({
-        _id: z.string({
+    body: z.object({
+        _id: z.number({
             required_error: "valid TODOID value is required",
         }),
         description: z.string({
@@ -17,7 +17,7 @@ exports.postTODOSchema = z.object({
         isDeleted: z.boolean({
             required_error: "valid isDeleted value is required",
         }),
-        location: z.array({
+        location: z.array(z.any(), {
             required_error: "valid location value is required",
         }),
         isPinBtnDisable: z.boolean({

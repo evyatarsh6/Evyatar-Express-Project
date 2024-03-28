@@ -19,6 +19,5 @@ const validateMiddleware = () => async (req, res, next) => {
 }
 
 router.post('/', validateMiddleware(), postTODOHandler)
-// router.post('/', postTODOHandler)
 
 module.exports = router;

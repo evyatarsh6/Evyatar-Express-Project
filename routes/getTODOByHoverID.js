@@ -14,7 +14,6 @@ const validateMiddleware = () => async (req, res, next) => {
 }
 
 router.get('/:todoId', validateMiddleware(), getTodoByIDHandler)
-// router.get('/:todoId', getTodoByIDHandler)
 
 
 module.exports = router;
